@@ -10,10 +10,10 @@ local config = wezterm.config_builder()
 -- config.color_scheme = 'AdventureTime'
 -- config.color_scheme = 'Gruvbox (Gogh)'
 -- config.color_scheme = 'Gruvbox Dark (Gogh)'
-config.color_scheme = 'Gruvbox dark, medium (base16)'
+-- config.color_scheme = 'Gruvbox dark, medium (base16)'
 -- config.color_scheme = 'GruvboxDark'
 -- config.color_scheme = 'GruvboxDarkHard'
--- config.color_scheme = 'Tokyo Night'
+config.color_scheme = 'Tokyo Night'
 -- config.color_scheme = 'tokyonight'
 -- config.color_scheme = 'Tokyo Night Storm'
 

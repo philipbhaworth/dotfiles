@@ -54,13 +54,13 @@ export PATH="$HOME/.local/opt/nvim-linux64/bin:$PATH"
 export PATH="$HOME/opt:$PATH"
 
 # Source .bash-aliases if it exists
-if [ -f ~/.bash-aliases ]; then
-    . ~/.bash-aliases
+if [ -f ~/dotfiles/bash/.bash-aliases ]; then
+    . ~/dotfiles/bash/.bash-aliases
 fi
 
 # Source .bash-functions if it exists
-if [ -f ~/.bash-functions ]; then
-    . ~/.bash-functions
+if [ -f ~/dotfiles/bash/.bash-functions ]; then
+    . ~/dotfiles/bash/.bash-functions
 fi
 
 # Programmable completion features (only if not turned on globally)
