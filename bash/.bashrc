@@ -69,6 +69,8 @@ fi
 
 # Additional setup for fancy prompt, completion, etc., can be added here
 
+PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[31m\]$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\e[00m\] \$ '
+
 # Ensure this is at the end of your .bashrc file
 source /home/philipb/.config/broot/launcher/bash/br
 
