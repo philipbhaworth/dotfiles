@@ -14,12 +14,12 @@ if [ -f /etc/debian_version ]; then
     echo "Detected Debian/Ubuntu system."
     sudo apt update && sudo apt upgrade -y
     # Install packages
-    sudo apt install -y neofetch htop vim pandoc micro exa
+    sudo apt install -y neofetch htop vim pandoc ranger micro exa
 elif [ -f /etc/fedora-release ]; then
     echo "Detected Fedora system."
     sudo dnf update -y
     # Install packages
-    sudo dnf install -y neofetch htop vim pandoc micro neovim exa
+    sudo dnf install -y neofetch htop vim pandoc micro ranger exa
 else
     echo "Unsupported distribution. Exiting."
     exit 1
@@ -32,6 +32,7 @@ htop --version
 vim --version
 pandoc --version
 micro --version
+ranger --version
 if [ -f /etc/fedora-release ]; then
     nvim --version
 fi
