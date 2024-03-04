@@ -6,6 +6,9 @@ case $- in
       *) return;;
 esac
 
+# Prevent ranger from loading the default rc.conf
+export RANGER_LOAD_DEFAULT_RC=FALSE
+
 # Source global definitions (Fedora specific, but harmless on Debian/Ubuntu)
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc

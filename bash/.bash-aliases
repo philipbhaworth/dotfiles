@@ -43,8 +43,9 @@ alias c='clear'                         # Clear the terminal display
 alias path='echo -e ${PATH//:/\\n}'     # Display the PATH variable in a readable format
 
 # Quick editing of config files
-alias bashrc='nvim ~/.bashrc'           # Quickly edit .bashrc
-alias edalias='nvim ~/dotfiles/bash/.bash-aliases' # <-- This is likely causing your issue!
+alias edbashrc='vim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
+alias edalias='vim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
+alias edvimrc='vim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
 
 # System monitoring and performance
 alias top='htop'                        # Enhanced top (needs htop installed)

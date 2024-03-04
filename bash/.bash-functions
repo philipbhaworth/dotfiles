@@ -1,3 +1,4 @@
+
 # Custom function definitions
 
 # Navigate to a specific directory and list contents
@@ -5,3 +6,11 @@ ob() {
   cd ~/notes/uiowa-it-vault/ && exa -l
 }
 
+function ranger_cd() {
+    tempfile=$(mktemp)
+    ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    if chosen_dir=$(cat "$tempfile"); then
+        cd "$chosen_dir"
+    fi
+    rm -f "$tempfile"
+}
