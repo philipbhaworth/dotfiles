@@ -21,4 +21,4 @@ filetype indent on
 
 " For Markdown editing
 autocmd FileType markdown setlocal wrap
-autocmd FileType markdown setlocal spell spelllang=en_us
+" autocmd FileType markdown setlocal spell spelllang=en_us
