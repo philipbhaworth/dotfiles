@@ -20,6 +20,18 @@ elif [ -f /etc/fedora-release ]; then
     sudo dnf update -y
     # Install packages
     sudo dnf install -y neofetch htop vim pandoc micro ranger exa
+elif [ -f /etc/os-release ]; then
+    . /etc/os-release
+    if [ "$NAME" = "openSUSE Leap" ] || [ "$NAME" = "openSUSE Tumbleweed" ]; then
+        echo "Detected openSUSE system."
+        sudo zypper refresh
+        sudo zypper update -y
+        # Install packages. Note: Some package names may differ. Adjust as necessary.
+        sudo zypper install -y neofetch htop vim pandoc ranger micro exa
+    else
+        echo "Unsupported distribution. Exiting."
+        exit 1
+    fi
 else
     echo "Unsupported distribution. Exiting."
     exit 1
@@ -33,8 +45,6 @@ vim --version
 pandoc --version
 micro --version
 ranger --version
-if [ -f /etc/fedora-release ]; then
-    nvim --version
-fi
+# exa might not be directly available in openSUSE repositories, consider an alternative or manual installation.
 
-echo "Setup complete. The wheel is yours!"
+echo "time to reboot!"

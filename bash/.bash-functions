@@ -3,7 +3,7 @@
 
 # Navigate to a specific directory and list contents
 ob() {
-  cd ~/notes/uiowa-it-vault/ && exa -l
+  cd ~/notes/digital-garden/ && exa -l
 }
 
 function ranger_cd() {

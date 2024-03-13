@@ -27,7 +27,7 @@ install_common_packages() {
     if [[ -f /etc/debian_version ]]; then
         sudo apt install -y $packages gnome-tweaks tilix
     elif [[ -f /etc/fedora-release ]]; then
-        sudo dnf install -y $packages gnome-tweaks tilix
+        sudo dnf install -y $packages gnome-tweaks tilix neovim
     fi
 }
 

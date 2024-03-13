@@ -1,5 +1,5 @@
 # ----------------------------------------
-# Custom Alias Definitions
+# Custom Fedora Alias Definitions
 # ----------------------------------------
 
 # Basic `exa` aliases for enhanced file listings
@@ -20,6 +20,15 @@ alias dnfins='sudo dnf install'         # Install packages
 alias dnfrem='sudo dnf remove'          # Remove packages
 alias dnfsrch='dnf search'              # Search packages
 alias dnfshw='dnf info'                 # Show package information
+
+# `Zypper` package management shortcuts for openSUSE
+alias zyup='sudo zypper update'           # Update all packages
+alias zydup='sudo zypper dup'             # Perform a distribution upgrade
+alias zyins='sudo zypper install'         # Install packages
+alias zyrem='sudo zypper remove'          # Remove packages
+alias zysrch='zypper search'              # Search packages
+alias zyshw='zypper info'                 # Show package information
+
 
 # System utilities
 alias df='df -h'                        # Disk free, in human-readable form
@@ -43,9 +52,12 @@ alias c='clear'                         # Clear the terminal display
 alias path='echo -e ${PATH//:/\\n}'     # Display the PATH variable in a readable format
 
 # Quick editing of config files
-alias edbashrc='vim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
-alias edalias='vim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
-alias edvimrc='vim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
+# alias edbashrc='vim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
+# alias edalias='vim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
+# alias edvimrc='vim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
+alias edbashrc='nvim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
+alias edalias='nvim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
+alias edvimrc='nvim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
 
 # System monitoring and performance
 alias top='htop'                        # Enhanced top (needs htop installed)
@@ -62,6 +74,9 @@ alias gl='git pull'
 alias gco='git checkout'
 alias gb='git branch'
 alias glog='git log --oneline --graph --decorate'
+
+# app/package specific 
+alias geanydark='GTK_THEME=Adwaita:dark geany & disown'
 
 # Safety features
 alias rm='rm -i'                        # Prompt before removing files
