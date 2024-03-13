@@ -71,8 +71,11 @@ if ! shopt -oq posix; then
 fi
 
 # Additional setup for fancy prompt, completion, etc., can be added here
+# PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[31m\]$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\e[00m\] \$ '
 
-PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[31m\]$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\e[00m\] \$ '
+# Define a custom prompt
+export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
+
 
 # Ensure this is at the end of your .bashrc file
 source /home/philipb/.config/broot/launcher/bash/br

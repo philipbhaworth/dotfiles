@@ -2,11 +2,17 @@
 # Custom Fedora Alias Definitions
 # ----------------------------------------
 
-# Basic `exa` aliases for enhanced file listings
-alias ls='exa -lh --git'
-alias ll='exa -lah --git' # Long list, all files, human-readable sizes, show git status
-alias la='exa -a --git'  # List all files, including hidden, show git status
-alias l='exa -lbGF --git' # List with size, type indicator, and git status
+# Basic `exa` aliases for enhanced file listings - Fedora & Debian
+# alias ls='exa -lh --git'
+# alias ll='exa -lah --git' # Long list, all files, human-readable sizes, show git status
+# alias la='exa -a --git'  # List all files, including hidden, show git status
+# alias l='exa -lbGF --git' # List with size, type indicator, and git status
+
+# Basic `eza` aliases for enhanced file listings - openSUSE
+alias ls='eza -lh --git'
+alias ll='eza -lah --git' # Long list, all files, human-readable sizes, show git status
+alias la='eza -a --git'  # List all files, including hidden, show git status
+alias l='eza -lbGF --git' # List with size, type indicator, and git status
 
 # Directory navigation
 alias ..='cd ..'
