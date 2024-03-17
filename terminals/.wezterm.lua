@@ -19,7 +19,7 @@ local config = {
     tab_bar_at_bottom = false,
 
     -- Use fancy tab bar or not
-    use_fancy_tab_bar = true,
+    use_fancy_tab_bar = false,
 
     -- Set window decorations
     window_decorations = "RESIZE",
