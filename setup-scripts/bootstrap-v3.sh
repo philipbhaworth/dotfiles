@@ -49,6 +49,7 @@ setup_flatpak() {
     sudo flatpak update
     flatpak install flathub org.wezfurlong.wezterm -y
     flatpak install flathub md.obsidian.Obsidian -y
+    flatpak install flathub org.geany.Geany -y
 }
 
 # Function to configure Git with user input
