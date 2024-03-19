@@ -51,6 +51,18 @@ setup_flatpak() {
     flatpak install flathub md.obsidian.Obsidian -y
 }
 
+# Function to configure Git with user input
+configure_git() {
+    echo "Configuring Git user information..."
+    read -p "Enter your Git user name: " git_user_name
+    read -p "Enter your Git user email: " git_user_email
+
+    git config --global user.name "$git_user_name"
+    git config --global user.email "$git_user_email"
+
+    echo "Git user name and email configured."
+}
+
 # Function to display installed package versions
 display_versions() {
     local commands="micro vim pandoc exa bat htop"
@@ -68,10 +80,10 @@ main() {
     update_system || exit 1
     install_core_packages
     setup_flatpak
+    configure_git  # Add this line to call your new function
     display_versions
     printf "Setup complete. The wheel is yours!\n"
     echo "Time to reboot."
 }
 
 main
-
