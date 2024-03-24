@@ -1,0 +1,97 @@
+# ----------------------------------------
+# Custom Fedora Alias Definitions
+# ----------------------------------------
+
+# Basic `exa` aliases for enhanced file listings - Fedora & Debian
+# alias ls='exa -lh --git'
+# alias ll='exa -lah --git' # Long list, all files, human-readable sizes, show git status
+# alias la='exa -a --git'  # List all files, including hidden, show git status
+# alias l='exa -lbGF --git' # List with size, type indicator, and git status
+
+# Basic `eza` aliases for enhanced file listings - openSUSE
+alias ls='eza -lh --git'
+alias ll='eza -lah --git' # Long list, all files, human-readable sizes, show git status
+alias la='eza -a --git'  # List all files, including hidden, show git status
+alias l='eza -lbGF --git' # List with size, type indicator, and git status
+
+# Directory navigation
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+# `dnf` package management shortcuts for Fedora
+alias dnfup='sudo dnf update'           # Update all packages
+alias dnfins='sudo dnf install'         # Install packages
+alias dnfrem='sudo dnf remove'          # Remove packages
+alias dnfsrch='dnf search'              # Search packages
+alias dnfshw='dnf info'                 # Show package information
+
+# `Zypper` package management shortcuts for openSUSE
+alias zyup='sudo zypper update'           # Update all packages
+alias zydup='sudo zypper dup'             # Perform a distribution upgrade
+alias zyins='sudo zypper install'         # Install packages
+alias zyrem='sudo zypper remove'          # Remove packages
+alias zysrch='zypper search'              # Search packages
+alias zyshw='zypper info'                 # Show package information
+
+
+# System utilities
+alias df='df -h'                        # Disk free, in human-readable form
+alias du='du -h -c'                     # Disk usage, human-readable, with total
+alias free='free -m'                    # Free memory, in megabytes
+
+# Network operations
+alias ping='ping -c 5'                  # Ping, limit to 5 attempts
+
+# Misc
+alias grep='grep --color=auto'          # Grep with color
+alias mkdir='mkdir -pv'                 # Make directories, show path, verbose
+
+# Reload the .bashrc file
+alias reload='source ~/.bashrc'
+
+# Enhanced navigation and file management
+alias tree='tree -C'                    # Colorized tree view of directory structure
+alias h='history'                       # Quick access to command history
+alias c='clear'                         # Clear the terminal display
+alias path='echo -e ${PATH//:/\\n}'     # Display the PATH variable in a readable format
+
+# Quick editing of config files
+alias edbashrc='vim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
+alias edvimrc='vim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
+alias edalias='vim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
+#alias edbashrc='nvim ~/dotfiles/bash/.bashrc'      # Quickly edit .bashrc
+#alias edalias='nvim ~/dotfiles/bash/.bash-aliases' # Quickly edit aliases
+#alias edvimrc='nvim ~/dotfiles/vim-config/.vimrc'  # Quickly edit .vimrc
+
+# System monitoring and performance
+alias top='htop'                        # Enhanced top (needs htop installed)
+alias meminfo='free -h --si'            # Show memory information in human-readable form, using SI units
+alias cpuinfo='lscpu'                   # Display detailed CPU information
+alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT' # List block devices in a clear format
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias glog='git log --oneline --graph --decorate'
+
+# app/package specific 
+alias geanydark='GTK_THEME=Adwaita:dark geany & disown'
+
+# Safety features
+alias rm='rm -i'                        # Prompt before removing files
+alias cp='cp -i'                        # Prompt before copying over files
+alias mv='mv -i'                        # Prompt before moving files
+
+# Quick access to documentation
+alias man='man -P most'                 # Use 'most' pager for manuals, if installed
+
+
+# Notification for long-running commands
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
