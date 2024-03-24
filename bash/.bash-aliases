@@ -5,7 +5,7 @@ fi
 
 # Alias definitions based on the distribution
 if [[ "$ID" == "fedora" ]]; then
-    # Basic `exa` aliases for enhanced file listings - Fedora & Debian
+    # Basic `exa` aliases for enhanced file listings - Fedora
     alias ls='exa -lh --git'
     alias ll='exa -lah --git'
     alias la='exa -a --git'
@@ -19,13 +19,18 @@ if [[ "$ID" == "fedora" ]]; then
     alias dnfshw='dnf info'
 
 elif [[ "$ID" == "debian" ]] || [[ "$ID_LIKE" == *"debian"* ]]; then
-    # Basic `exa` aliases for enhanced file listings - Fedora & Debian
+    # Basic `exa` aliases for enhanced file listings - Debian
     alias ls='exa -lh --git'
     alias ll='exa -lah --git'
     alias la='exa -a --git'
     alias l='exa -lbGF --git'
 
-    # Placeholder for any Debian-specific package management aliases if needed
+    # `apt` package management shortcuts for Debian
+    alias aptup='sudo apt update && sudo apt upgrade'
+    alias aptins='sudo apt install'
+    alias aptrem='sudo apt remove'  # Use 'sudo apt purge' to remove packages and their configuration files
+    alias aptsrch='apt search'
+    alias aptshw='apt show'
 
 elif [[ "$ID" == "opensuse" ]] || [[ "$ID_LIKE" == *"suse"* ]]; then
     # Basic `eza` aliases for enhanced file listings - openSUSE
@@ -41,7 +46,22 @@ elif [[ "$ID" == "opensuse" ]] || [[ "$ID_LIKE" == *"suse"* ]]; then
     alias zyrem='sudo zypper remove'
     alias zysrch='zypper search'
     alias zyshw='zypper info'
+
+elif [[ "$ID" == "arch" ]]; then
+    # Basic `exa` aliases for enhanced file listings - Arch Linux
+    alias ls='exa -lh --git'
+    alias ll='exa -lah --git'
+    alias la='exa -a --git'
+    alias l='exa -lbGF --git'
+
+    # `pacman` package management shortcuts for Arch Linux
+    alias pacup='sudo pacman -Syu'  # Synchronize with repositories and upgrade packages
+    alias pacins='sudo pacman -S'   # Install packages
+    alias pacrem='sudo pacman -R'   # Remove packages (use -Rs to include dependencies not required by other packages)
+    alias pacsrch='pacman -Ss'      # Search for packages
+    alias pacshw='pacman -Qi'       # Display information about a package
 fi
+
 
 # Directory navigation
 alias ..='cd ..'
