@@ -80,4 +80,4 @@ export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;1
 # Ensure this is at the end of your .bashrc file
 # source /home/philipb/.config/broot/launcher/bash/br
 source /usr/share/git-core/contrib/completion/git-prompt.sh
-
+eval "$(starship init bash)"
