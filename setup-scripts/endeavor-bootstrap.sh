@@ -17,7 +17,7 @@ update_system() {
 
 # Function to install core packages
 install_core_packages() {
-    local packages="micro vim pandoc exa bat htop"
+    local packages="micro vim pandoc lsd bat htop"
     printf "Installing core packages.\n"
     sudo pacman -S --noconfirm $packages
 }
@@ -48,7 +48,7 @@ configure_git() {
 
 # Function to display installed package versions
 display_versions() {
-    local commands="micro vim pandoc exa bat htop"
+    local commands="micro vim pandoc lsd bat htop"
     printf "Installed package versions:\n"
     for cmd in $commands; do
         if command -v $cmd &>/dev/null; then

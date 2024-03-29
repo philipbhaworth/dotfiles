@@ -26,11 +26,11 @@ update_system() {
 # Function to install core packages based on the detected distribution
 install_core_packages() {
     if [[ -f /etc/debian_version ]]; then
-        local packages="micro vim pandoc exa bat htop"
+        local packages="micro vim pandoc lsd bat htop"
         printf "Installing core packages on Debian/Ubuntu.\n"
         sudo apt install -y $packages
     elif [[ -f /etc/fedora-release ]]; then
-        local packages="micro vim pandoc eza bat htop" # Use eza for Fedora
+        local packages="micro vim pandoc lsd bat htop" # Use eza for Fedora
         printf "Installing core packages on Fedora.\n"
         sudo dnf install -y $packages
     fi
@@ -66,7 +66,7 @@ configure_git() {
 
 # Function to display installed package versions
 display_versions() {
-    local commands="micro vim pandoc exa bat htop"
+    local commands="micro vim pandoc lsd bat htop"
     printf "Installed package versions:\n"
     for cmd in $commands; do
         if command -v $cmd &>/dev/null; then
