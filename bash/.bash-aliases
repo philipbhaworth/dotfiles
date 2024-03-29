@@ -5,11 +5,11 @@ fi
 
 # Alias definitions based on the distribution
 if [[ "$ID" == "fedora" ]]; then
-    # Basic `exa` aliases for enhanced file listings - Fedora
-    alias ls='exa -lh --git'
-    alias ll='exa -lah --git'
-    alias la='exa -a --git'
-    alias l='exa -lbGF --git'
+    # Basic `lsd` aliases for enhanced file listings - Fedora
+    alias ls='lsd -lh --git'
+    alias ll='lsd -lah --git'
+    alias la='lsd -a --git'
+    alias l='lsd -lbGF --git'
 
     # `dnf` package management shortcuts for Fedora
     alias dnfup='sudo dnf update'
@@ -19,11 +19,11 @@ if [[ "$ID" == "fedora" ]]; then
     alias dnfshw='dnf info'
 
 elif [[ "$ID" == "debian" ]] || [[ "$ID_LIKE" == *"debian"* ]]; then
-    # Basic `exa` aliases for enhanced file listings - Debian
-    alias ls='exa -lh --git'
-    alias ll='exa -lah --git'
-    alias la='exa -a --git'
-    alias l='exa -lbGF --git'
+    # Basic `lsd` aliases for enhanced file listings - Debian
+    alias ls='lsd -lh --git'
+    alias ll='lsd -lah --git'
+    alias la='lsd -a --git'
+    alias l='lsd -lbGF --git'
 
     # `apt` package management shortcuts for Debian
     alias aptup='sudo apt update && sudo apt upgrade'
@@ -33,11 +33,11 @@ elif [[ "$ID" == "debian" ]] || [[ "$ID_LIKE" == *"debian"* ]]; then
     alias aptshw='apt show'
 
 elif [[ "$ID" == "opensuse" ]] || [[ "$ID_LIKE" == *"suse"* ]]; then
-    # Basic `eza` aliases for enhanced file listings - openSUSE
-    alias ls='eza -lh --git'
-    alias ll='eza -lah --git'
-    alias la='eza -a --git'
-    alias l='eza -lbGF --git'
+    # Basic `lsd` aliases for enhanced file listings - openSUSE
+    alias ls='lsd -lh --git'
+    alias ll='lsd -lah --git'
+    alias la='lsd -a --git'
+    alias l='lsd -lbGF --git'
 
     # `Zypper` package management shortcuts for openSUSE
     alias zyup='sudo zypper update'
@@ -48,11 +48,11 @@ elif [[ "$ID" == "opensuse" ]] || [[ "$ID_LIKE" == *"suse"* ]]; then
     alias zyshw='zypper info'
 
 elif [[ "$ID" == "arch" ]]; then
-    # Basic `exa` aliases for enhanced file listings - Arch Linux
-    alias ls='exa -lh --git'
-    alias ll='exa -lah --git'
-    alias la='exa -a --git'
-    alias l='exa -lbGF --git'
+    # Basic `lsd` aliases for enhanced file listings - Arch Linux
+    alias ls='lsd -lh --git'
+    alias ll='lsd -lah --git'
+    alias la='lsd -a --git'
+    alias l='lsd -lbGF --git'
 
     # `pacman` package management shortcuts for Arch Linux
     alias pacup='sudo pacman -Syu'  # Synchronize with repositories and upgrade packages
