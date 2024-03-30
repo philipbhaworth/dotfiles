@@ -20,10 +20,10 @@ if [[ "$ID" == "fedora" ]]; then
 
 elif [[ "$ID" == "debian" ]] || [[ "$ID_LIKE" == *"debian"* ]]; then
     # Basic `lsd` aliases for enhanced file listings - Debian
-    alias ls='lsd -lh --git'
-    alias ll='lsd -lah --git'
-    alias la='lsd -a --git'
-    alias l='lsd -lbGF --git'
+    alias ls='lsd -lh'
+    alias ll='lsd -lah'
+    alias la='lsd -a'
+    alias l='lsd -lbGF'
 
     # `apt` package management shortcuts for Debian
     alias aptup='sudo apt update && sudo apt upgrade'
