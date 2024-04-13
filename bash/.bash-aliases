@@ -85,8 +85,8 @@ alias mkdir='mkdir -pv'
 alias reload='source ~/.bashrc'
 
 # Enhanced navigation and file management
-alias dot='cd ~/dotfiles'
-alias config='cd ~/.config'
+alias dot='cd ~/dotfiles && ll'
+alias config='cd ~/.config && ll'
 alias tree='tree -C'
 alias h='history'
 alias c='clear'
