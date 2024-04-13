@@ -87,6 +87,9 @@ if command -v starship >/dev/null 2>&1; then
     eval "$(starship init bash)"
 fi
 
+# Add your export statement here
+export "MICRO_TRUECOLOR=1"
+
 # Example for sourcing additional configurations
 # Ensure this is at the end of your .bashrc file for any final overrides or additions
 # source /home/yourusername/.config/broot/launcher/bash/br
