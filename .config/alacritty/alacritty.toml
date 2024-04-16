@@ -1,0 +1,25 @@
+# Alacritty configuration file
+
+# Import theme configurations (uncomment the theme you want to use)
+import = [
+  # "~/dotfiles/.config/alacritty/catppuccin-latte.toml",  # Catppuccin Latte
+  # "~/.config/alacritty/catppuccin-frappe.toml",       # Catppuccin Frappe
+  # "~/.config/alacritty/catppuccin-macchiato.toml",   # Catppuccin Macchiato
+  "~/dotfiles/.config/alacritty/catppuccin-mocha.toml"        # Catppuccin Mocha
+]
+
+# Shell settings
+[shell]
+program = "/bin/zsh"
+args = ["-l"]
+
+# Window settings
+[window]
+dimensions = { columns = 120, lines = 30 }
+padding = { x = 10, y = 10 }
+
+
+# Font settings
+[font]
+normal = { family = "FiraCode Nerd Font", style = "Regular" }
+size = 13.0
