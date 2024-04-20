@@ -26,11 +26,18 @@ install_core_packages() {
     # Install Starship prompt
     printf "Installing Starship prompt...\n"
     curl -sS https://starship.rs/install.sh | sh || { echo "Failed to install Starship. Exiting."; exit 1; }
+    # Create symlink for bat
+    mkdir -p ~/.local/bin
+    ln -s /usr/bin/batcat ~/.local/bin/bat || { echo "Failed to create symbolic link for bat. Exiting."; exit 1; }
 }
 
 # Function to enable Flatpak and install apps from Flathub
 setup_flatpak() {
-    printf "Flatpak is not supported on Debian by default.\n"
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "Failed to add Flathub remote. Exiting."; exit 1; }
+    sudo flatpak update || { echo "Failed to update Flatpak. Exiting."; exit 1; }
+    flatpak install flathub org.wezfurlong.wezterm -y || { echo "Failed to install Wezterm. Exiting."; exit 1; }
+    flatpak install flathub md.obsidian.Obsidian -y || { echo "Failed to install Obsidian. Exiting."; exit 1; }
+    flatpak install flathub org.geany.Geany -y || { echo "Failed to install Geany. Exiting."; exit 1; }
 }
 
 # Function to configure Git with user input
@@ -75,6 +82,7 @@ main() {
     setup_dotfiles
     update_system || exit 1
     install_core_packages
+    setup_flatpak
     configure_git
     display_versions
     install_fonts

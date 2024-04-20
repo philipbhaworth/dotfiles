@@ -1,10 +1,11 @@
+#!/bin/bash
+
 # Function to remove and create symbolic link for .bashrc and other configs
 setup_dotfiles() {
     rm -f "$HOME/.bashrc"
     ln -s "$HOME/dotfiles/bash/.bashrc" "$HOME/.bashrc" || { echo "Failed to create symbolic link for .bashrc. Exiting."; exit 1; }
     ln -s "$HOME/dotfiles/terminals/.wezterm.lua" "$HOME/.wezterm.lua" || { echo "Failed to create symbolic link for .wezterm.lua. Exiting."; exit 1; }
     ln -s "$HOME/dotfiles/vim-config/.vimrc" "$HOME/.vimrc" || { echo "Failed to create symbolic link for .vimrc. Exiting."; exit 1; }
-    # Create .config symlinks
     ln -s "$HOME/dotfiles/.config/starship.toml" "$HOME/.config/starship.toml" || { echo "Failed to create symbolic link for starship.toml. Exiting."; exit 1; }
     ln -s "$HOME/dotfiles/.config/tilix" "$HOME/.config/tilix" || { echo "Failed to create symbolic link for tilix. Exiting."; exit 1; }
     ln -s "$HOME/dotfiles/.config/micro" "$HOME/.config/micro" || { echo "Failed to create symbolic link for micro. Exiting."; exit 1; }
@@ -30,13 +31,19 @@ install_core_packages() {
     printf "Installing core packages...\n"
     if [[ -f /etc/debian_version ]]; then
         packages+=" flatpak"  # Adding flatpak for Debian/Ubuntu
-        printf "Adding Flatpak repository...\n"
-        sudo apt install -y flatpak || { echo "Failed to install Flatpak. Exiting."; exit 1; }
+        sudo apt install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
+    elif [[ -f /etc/fedora-release ]]; then
+        sudo dnf install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
+    else
+        echo "Unsupported distribution for package installation. Exiting." >&2
+        return 1
     fi
-    sudo dnf install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
     # Install Starship prompt
     printf "Installing Starship prompt...\n"
     curl -sS https://starship.rs/install.sh | sh || { echo "Failed to install Starship. Exiting."; exit 1; }
+    # Create symlink for bat
+    mkdir -p ~/.local/bin
+    ln -s /usr/bin/batcat ~/.local/bin/bat || { echo "Failed to create symbolic link for bat. Exiting."; exit 1; }
 }
 
 # Function to enable Flatpak and install apps from Flathub
