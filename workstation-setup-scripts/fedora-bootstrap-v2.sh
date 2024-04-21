@@ -30,7 +30,11 @@ install_core_packages() {
 
 # Function to enable Flatpak and install apps from Flathub
 setup_flatpak() {
-    printf "Flatpak is not supported on Fedora by default.\n"
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "Failed to add Flathub remote. Exiting."; exit 1; }
+    sudo flatpak update || { echo "Failed to update Flatpak. Exiting."; exit 1; }
+    flatpak install flathub org.wezfurlong.wezterm -y || { echo "Failed to install Wezterm. Exiting."; exit 1; }
+    flatpak install flathub md.obsidian.Obsidian -y || { echo "Failed to install Obsidian. Exiting."; exit 1; }
+    # flatpak install flathub org.geany.Geany -y || { echo "Failed to install Geany. Exiting."; exit 1; }
 }
 
 # Function to configure Git with user input
@@ -71,6 +75,17 @@ setup_gnome_terminal_colors() {
     curl -L https://raw.githubusercontent.com/catppuccin/gnome-terminal/v0.2.0/install.py | python3 - || { echo "Failed to add color schemes. Exiting."; exit 1; }
 }
 
+# Function to add wallpapers from GitHub
+install_wallpapers() {
+    local wallpaper_dir="$HOME/.local/share/wallpapers"
+    mkdir -p "$wallpaper_dir"
+    printf "Adding wallpapers for desktop...\n"
+    git clone https://github.com/philipbhaworth/walls.git "$wallpaper_dir" || {
+        echo "Failed to download wallpapers. Exiting."
+        return 1  # Using return to allow script to potentially continue if called from another context where exit is not desirable
+    }
+}
+
 main() {
     setup_dotfiles
     update_system || exit 1
@@ -78,6 +93,7 @@ main() {
     configure_git
     display_versions
     install_fonts
+    install_wallpapers
     setup_gnome_terminal_colors
     printf "Setup complete. The wheel is yours!\n"
     read -p "Do you want to reboot now? (y/n): " choice
