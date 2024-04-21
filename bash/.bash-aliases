@@ -97,9 +97,9 @@ alias edbashrc='vim ~/dotfiles/bash/.bashrc'
 alias edvimrc='vim ~/dotfiles/vim-config/.vimrc'
 alias edalias='vim ~/dotfiles/bash/.bash-aliases'
 # Uncomment the next lines if you prefer neovim
-# alias edbashrc='nvim ~/dotfiles/bash/.bashrc'
-# alias edalias='nvim ~/dotfiles/bash/.bash-aliases'
-# alias edvimrc='nvim ~/dotfiles/vim-config/.vimrc'
+alias nvbashrc='nvim ~/dotfiles/bash/.bashrc'
+alias nvalias='nvim ~/dotfiles/bash/.bash-aliases'
+alias nvvimrc='nvim ~/dotfiles/vim-config/.vimrc'
 
 # System monitoring and performance
 alias top='htop'
