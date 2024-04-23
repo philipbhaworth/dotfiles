@@ -61,7 +61,8 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Quick access to documentation
-alias man='man -P most'
+alias man='man -P "less -s"'
+
 
 # Notification for long-running commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'

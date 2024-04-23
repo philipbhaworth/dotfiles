@@ -20,7 +20,7 @@ update_system() {
 
 # Function to install core packages on Fedora
 install_core_packages() {
-    local packages="micro vim pandoc lsd bat htop lf curl"
+    local packages="micro vim pandoc lsd bat htop lf curl tree"
     printf "Installing core packages on Fedora...\n"
     sudo dnf install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
     # Install Starship prompt
