@@ -15,12 +15,12 @@ setup_dotfiles() {
 # Function to update Fedora system
 update_system() {
     printf "Updating Fedora system...\n"
-    sudo dnf update -y || { echo "Failed to update system. Exiting."; return 1; }
+    sudo dnf update -y || { echo "Failed to update system. Exiting."; exit 1; }
 }
 
 # Function to install core packages on Fedora
 install_core_packages() {
-    local packages="micro vim pandoc lsd bat htop lf curl tree"
+    local packages="micro vim pandoc lsd bat htop curl tree"
     printf "Installing core packages on Fedora...\n"
     sudo dnf install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
     # Install Starship prompt
@@ -34,7 +34,6 @@ setup_flatpak() {
     sudo flatpak update || { echo "Failed to update Flatpak. Exiting."; exit 1; }
     flatpak install flathub org.wezfurlong.wezterm -y || { echo "Failed to install Wezterm. Exiting."; exit 1; }
     flatpak install flathub md.obsidian.Obsidian -y || { echo "Failed to install Obsidian. Exiting."; exit 1; }
-    # flatpak install flathub org.geany.Geany -y || { echo "Failed to install Geany. Exiting."; exit 1; }
 }
 
 # Function to configure Git with user input
@@ -90,6 +89,7 @@ main() {
     setup_dotfiles
     update_system || exit 1
     install_core_packages
+    setup_flatpak
     configure_git
     display_versions
     install_fonts
