@@ -1,3 +1,9 @@
+# ====================
+# My .zshrc file
+# Description: Configuration file for zsh shell settings including environment paths, 
+# LS colors, man page colors, and an enhanced Git prompt.
+# ====================
+
 # Path Configuration
 # Adds Python 3.12 binaries to PATH for easy access to Python scripts and tools
 export PATH="/Users/hawrth/Library/Python/3.12/bin:$PATH"
@@ -22,43 +28,39 @@ export LESS_TERMCAP_so=$(printf '\e[38;5;246m')    # Begin standout-mode (info b
 export LESS_TERMCAP_ue=$(printf '\e[0m')           # End underline
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m') # Begin underline
 
-# Prompt Customization
+# Prompt Customization with Git Enhancements
 autoload -Uz vcs_info
-precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats '%b %F{red}✗%f%m%F{green}✔%f%c%u%F{blue}⇡%f'
+precmd() {
+  vcs_info
+  [[ $(git rev-list @{u}..HEAD 2>/dev/null | wc -l) -gt 0 ]] && vcs_info_msg_0_="${vcs_info_msg_0_}⇡"
+}
 setopt PROMPT_SUBST
-
-# Direct color codes
-PROMPT='%F{magenta}%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f %F{magenta}❯%f '
+PROMPT='
+%F{magenta}%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f
+%F{magenta}❯%f '
 
 # Aliases & Environment Variables
-# Enables color formatting in 'ls' and specifies color schemes
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
-alias lsl='ls -laGFh'  # 'ls' command with color, file type indicator, and human-readable sizes
+alias lsl='ls -laGFh'
 alias ll='ls -laG'
 alias c='clear'
 alias ob='cd ~/github/md-vaults/uiowa-it-vault/ && ls -l'
 
-# Shared aliases
+# Load Additional Configurations
 if [[ -f ~/dotfiles/zsh/.zsh-aliases ]]; then
     source ~/dotfiles/zsh/.zsh-aliases
 fi
+if [[ -d ~/.zshrc.d ]]; then
+    for rc_file in ~/.zshrc.d/*; do
+        if [[ -f "$rc_file" ]]; then
+            source "$rc_file"
+        fi
+    done
+fi
+unset rc_file
 
-# Include other zsh-specific configurations if you have them
-# If you plan to organize zsh scripts similar to .bashrc.d, you can use:
-# if [[ -d ~/.zshrc.d ]]; then
-#     for rc_file in ~/.zshrc.d/*; do
-#         if [[ -f "$rc_file" ]]; then
-#             source "$rc_file"
-#         fi
-#     done
-# fi
-# unset rc_file
-
-
-# You can use whatever you want as an alias, like for Mondays:
+# Useful Tools
 eval $(thefuck --alias fuck)
-
-# Load fzf if available
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
