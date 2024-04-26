@@ -12,23 +12,20 @@ setup_dotfiles() {
     ln -s "$HOME/dotfiles/.config/micro" "$HOME/.config/micro" || { echo "Failed to create symbolic link for micro. Exiting."; exit 1; }
 }
 
-# Function to update and upgrade Debian system
+# Function to update Debian system
 update_system() {
-    printf "Updating and upgrading Debian system...\n"
-    sudo apt update && sudo apt upgrade -y || { echo "Failed to update system. Exiting."; return 1; }
+    printf "Updating Debian system...\n"
+    sudo apt update && sudo apt upgrade -y || { echo "Failed to update system. Exiting."; exit 1; }
 }
 
 # Function to install core packages on Debian
 install_core_packages() {
-    local packages="micro vim pandoc lsd bat htop lf curl"
+    local packages="micro vim pandoc lsd bat lf htop curl tree"
     printf "Installing core packages on Debian...\n"
     sudo apt install -y $packages || { echo "Failed to install core packages. Exiting."; exit 1; }
     # Install Starship prompt
     printf "Installing Starship prompt...\n"
     curl -sS https://starship.rs/install.sh | sh || { echo "Failed to install Starship. Exiting."; exit 1; }
-    # Create symlink for bat
-    mkdir -p ~/.local/bin
-    ln -s /usr/bin/batcat ~/.local/bin/bat || { echo "Failed to create symbolic link for bat. Exiting."; exit 1; }
 }
 
 # Function to enable Flatpak and install apps from Flathub
@@ -37,7 +34,6 @@ setup_flatpak() {
     sudo flatpak update || { echo "Failed to update Flatpak. Exiting."; exit 1; }
     flatpak install flathub org.wezfurlong.wezterm -y || { echo "Failed to install Wezterm. Exiting."; exit 1; }
     flatpak install flathub md.obsidian.Obsidian -y || { echo "Failed to install Obsidian. Exiting."; exit 1; }
-    flatpak install flathub org.geany.Geany -y || { echo "Failed to install Geany. Exiting."; exit 1; }
 }
 
 # Function to configure Git with user input
@@ -78,6 +74,17 @@ setup_gnome_terminal_colors() {
     curl -L https://raw.githubusercontent.com/catppuccin/gnome-terminal/v0.2.0/install.py | python3 - || { echo "Failed to add color schemes. Exiting."; exit 1; }
 }
 
+# Function to add wallpapers from GitHub
+install_wallpapers() {
+    local wallpaper_dir="$HOME/.local/share/wallpapers"
+    mkdir -p "$wallpaper_dir"
+    printf "Adding wallpapers for desktop...\n"
+    git clone https://github.com/philipbhaworth/walls.git "$wallpaper_dir" || {
+        echo "Failed to download wallpapers. Exiting."
+        return 1  # Using return to allow script to potentially continue if called from another context where exit is not desirable
+    }
+}
+
 main() {
     setup_dotfiles
     update_system || exit 1
@@ -86,6 +93,7 @@ main() {
     configure_git
     display_versions
     install_fonts
+    install_wallpapers
     setup_gnome_terminal_colors
     printf "Setup complete. The wheel is yours!\n"
     read -p "Do you want to reboot now? (y/n): " choice
