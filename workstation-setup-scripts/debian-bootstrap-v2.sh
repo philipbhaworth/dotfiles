@@ -30,10 +30,33 @@ install_core_packages() {
 
 # Function to enable Flatpak and install apps from Flathub
 setup_flatpak() {
-    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || { echo "Failed to add Flathub remote. Exiting."; exit 1; }
-    sudo flatpak update || { echo "Failed to update Flatpak. Exiting."; exit 1; }
-    flatpak install flathub org.wezfurlong.wezterm -y || { echo "Failed to install Wezterm. Exiting."; exit 1; }
-    flatpak install flathub md.obsidian.Obsidian -y || { echo "Failed to install Obsidian. Exiting."; exit 1; }
+    # Installing Flatpak if it's not already installed
+    sudo apt-get install -y flatpak || {
+        echo "Failed to install Flatpak. Exiting."
+        exit 1
+    }
+
+    # Adding the Flathub repository
+    flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo || {
+        echo "Failed to add Flathub remote. Exiting."
+        exit 1
+    }
+
+    # Updating Flatpak repositories
+    sudo flatpak update || {
+        echo "Failed to update Flatpak. Exiting."
+        exit 1
+    }
+
+    # Installing specific applications
+    flatpak install flathub org.wezfurlong.wezterm -y || {
+        echo "Failed to install Wezterm. Exiting."
+        exit 1
+    }
+    flatpak install flathub md.obsidian.Obsidian -y || {
+        echo "Failed to install Obsidian. Exiting."
+        exit 1
+    }
 }
 
 # Function to configure Git with user input
@@ -63,7 +86,7 @@ display_versions() {
 # Function to install additional fonts and update font cache
 install_fonts() {
     printf "Installing additional fonts...\n"
-    sudo mv ~/dotfiles/nerd-fonts/*.ttf ~/dotfiles/nerd-fonts/*.otf /usr/share/fonts/ || { echo "Failed to move fonts. Exiting."; exit 1; }
+    sudo cp ~/dotfiles/nerd-fonts/*.ttf ~/dotfiles/nerd-fonts/*.otf /usr/share/fonts/ || { echo "Failed to move fonts. Exiting."; exit 1; }
     printf "Updating font cache...\n"
     sudo fc-cache -f -v || { echo "Failed to update font cache. Exiting."; exit 1; }
 }
