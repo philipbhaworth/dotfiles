@@ -30,14 +30,27 @@ export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m') # Begin underline
 
 # Prompt Customization with Git Enhancements
 autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' formats '%b %F{red}✗%f%m%F{green}✔%f%c%u%F{blue}⇡%f'
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr '%F{green}✔%f'
+zstyle ':vcs_info:git:*' unstagedstr '%F{red}✗%f'
+zstyle ':vcs_info:git:*' formats '%b %c%u'
+zstyle ':vcs_info:git:*' actionformats '%b %p|%F{blue}⇡%f %c%u'
+
 precmd() {
   vcs_info
-  [[ $(git rev-list @{u}..HEAD 2>/dev/null | wc -l) -gt 0 ]] && vcs_info_msg_0_="${vcs_info_msg_0_}⇡"
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    if [[ $(git diff --cached --quiet HEAD 2>/dev/null; echo $?) == 1 ]]; then
+      vcs_info_msg_0_="${vcs_info_msg_0_} ${stagedstr}"
+    fi
+    if [[ $(git diff-files --quiet 2>/dev/null; echo $?) == 1 ]]; then
+      vcs_info_msg_0_="${vcs_info_msg_0_} ${unstagedstr}"
+    fi
+  fi
 }
+
 setopt PROMPT_SUBST
-PROMPT='
-%F{magenta}┌─[%f%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
+
+PROMPT='%F{magenta}┌─[%f%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
 %F{magenta}└─❯%f '
 
 # Aliases & Environment Variables
