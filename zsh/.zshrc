@@ -37,7 +37,7 @@ precmd() {
 }
 setopt PROMPT_SUBST
 PROMPT='
-%F{magenta}┌─[%f%n@%m%F{magenta}]─[%F{yellow}%~%F{magenta}]─[%F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
+%F{magenta}┌─[%f%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
 %F{magenta}└─❯%f '
 
 # Aliases & Environment Variables
