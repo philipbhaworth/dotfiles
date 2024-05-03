@@ -29,29 +29,36 @@ export LESS_TERMCAP_ue=$(printf '\e[0m')           # End underline
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m') # Begin underline
 
 # Prompt Customization with Git Enhancements
+# Load vcs_info for Git enhancements
 autoload -Uz vcs_info
 zstyle ':vcs_info:git:*' check-for-changes true
 zstyle ':vcs_info:git:*' stagedstr '%F{green}✔%f'
 zstyle ':vcs_info:git:*' unstagedstr '%F{red}✗%f'
-zstyle ':vcs_info:git:*' formats '%b %c%u'
-zstyle ':vcs_info:git:*' actionformats '%b %p|%F{blue}⇡%f %c%u'
+zstyle ':vcs_info:git:*' formats 'on %b%c%u'
+zstyle ':vcs_info:git:*' actionformats 'on %b %p|%F{blue}⇡%f %c%u'
 
+# Update prompt info before displaying it
 precmd() {
   vcs_info
   if [[ -n ${vcs_info_msg_0_} ]]; then
     if [[ $(git diff --cached --quiet HEAD 2>/dev/null; echo $?) == 1 ]]; then
-      vcs_info_msg_0_="${vcs_info_msg_0_} ${stagedstr}"
+      vcs_info_msg_0_="${vcs_info_msg_0_}${stagedstr}"
     fi
     if [[ $(git diff-files --quiet 2>/dev/null; echo $?) == 1 ]]; then
-      vcs_info_msg_0_="${vcs_info_msg_0_} ${unstagedstr}"
+      vcs_info_msg_0_="${vcs_info_msg_0_}${unstagedstr}"
     fi
   fi
 }
 
 setopt PROMPT_SUBST
 
-PROMPT='%F{magenta}┌─[%f%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
-%F{magenta}└─❯%f '
+# Define the prompt structure with clear separation of Git branch
+PROMPT='%F{magenta}┌─[%f%n@%m]%F{yellow}[%~]%F{cyan}[${vcs_info_msg_0_}%f]%F{magenta}
+└─❯%f '
+RPROMPT='[%D{%I:%M %p}]'  # Display the current time in 12-hour format with AM/PM
+
+#RPROMPT='[%@]'  # Display the current time in 12-hour format with AM/PM
+
 
 # Aliases & Environment Variables
 export CLICOLOR=1
