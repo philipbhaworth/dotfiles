@@ -99,6 +99,44 @@ PROMPT='
 %F{magenta}┌─[%f%n@%m %F{yellow}%~ %F{cyan}${vcs_info_msg_0_}%f%F{magenta}]
 %F{magenta}└─❯%f '
 
+---
+
+# Current 05/03/2024
+
+# Prompt Customization with Git Enhancements
+autoload -Uz vcs_info
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:git:*' stagedstr '%F{green}✔%f'
+zstyle ':vcs_info:git:*' unstagedstr '%F{red}✗%f'
+zstyle ':vcs_info:git:*' formats '%b %c%u'
+zstyle ':vcs_info:git:*' actionformats '%b %p|%F{blue}⇡%f %c%u'
+
+precmd() {
+  vcs_info
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    if [[ $(git diff --cached --quiet HEAD 2>/dev/null; echo $?) == 1 ]]; then
+      vcs_info_msg_0_="${vcs_info_msg_0_} ${stagedstr}"
+    fi
+    if [[ $(git diff-files --quiet 2>/dev/null; echo $?) == 1 ]]; then
+      vcs_info_msg_0_="${vcs_info_msg_0_} ${unstagedstr}"
+    fi
+  fi
+}
+
+setopt PROMPT_SUBST
+
+# Set colors for username and hostname
+USERNAME_COLOR="%F{blue}"
+HOSTNAME_COLOR="%F{green}"
+RESET_COLOR="%f"
+PROMPT_COLOR="%F{magenta}"  # Main color for other parts of the prompt
+INFO_COLOR="%F{yellow}"    # Color for the directory path
+VCS_COLOR="%F{cyan}"       # Color for version control system info
+
+# Update the PROMPT variable
+PROMPT="${PROMPT_COLOR}┌─[${USERNAME_COLOR}%n${RESET_COLOR}@${HOSTNAME_COLOR}%m ${INFO_COLOR}%~ ${VCS_COLOR}${vcs_info_msg_0_}${RESET_COLOR}${PROMPT_COLOR}]
+${PROMPT_COLOR}└─❯${RESET_COLOR} "
+RPROMPT="${PROMPT_COLOR}[%@]${RESET_COLOR}" # Display the current time in 12-hour format with AM/PM
 
 
 
