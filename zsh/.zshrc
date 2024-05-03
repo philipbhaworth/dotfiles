@@ -28,41 +28,14 @@ export LESS_TERMCAP_so=$(printf '\e[38;5;246m')    # Begin standout-mode (info b
 export LESS_TERMCAP_ue=$(printf '\e[0m')           # End underline
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m') # Begin underline
 
-# Prompt Customization with Git Enhancements
-autoload -Uz vcs_info
-zstyle ':vcs_info:git:*' check-for-changes true
-zstyle ':vcs_info:git:*' stagedstr '%F{green}✔%f'
-zstyle ':vcs_info:git:*' unstagedstr '%F{red}✗%f'
-zstyle ':vcs_info:git:*' formats '%b %c%u'
-zstyle ':vcs_info:git:*' actionformats '%b %p|%F{blue}⇡%f %c%u'
-
-precmd() {
-  vcs_info
-  if [[ -n ${vcs_info_msg_0_} ]]; then
-    if [[ $(git diff --cached --quiet HEAD 2>/dev/null; echo $?) == 1 ]]; then
-      vcs_info_msg_0_="${vcs_info_msg_0_} ${stagedstr}"
-    fi
-    if [[ $(git diff-files --quiet 2>/dev/null; echo $?) == 1 ]]; then
-      vcs_info_msg_0_="${vcs_info_msg_0_} ${unstagedstr}"
-    fi
-  fi
-}
-
-setopt PROMPT_SUBST
-
-# Set colors for username and hostname
-USERNAME_COLOR="%F{blue}"
-HOSTNAME_COLOR="%F{green}"
-RESET_COLOR="%f"
-PROMPT_COLOR="%F{magenta}"  # Main color for other parts of the prompt
-INFO_COLOR="%F{yellow}"    # Color for the directory path
-VCS_COLOR="%F{cyan}"       # Color for version control system info
-
-# Update the PROMPT variable
-PROMPT="${PROMPT_COLOR}┌─[${USERNAME_COLOR}%n${RESET_COLOR}@${HOSTNAME_COLOR}%m ${INFO_COLOR}%~ ${VCS_COLOR}${vcs_info_msg_0_}${RESET_COLOR}${PROMPT_COLOR}]
-${PROMPT_COLOR}└─❯${RESET_COLOR} "
-RPROMPT="${PROMPT_COLOR}[%@]${RESET_COLOR}" # Display the current time in 12-hour format with AM/PM
-
+# Load Starship, if available
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init zsh)"
+else
+    # Define a fallback prompt if Starship is not installed
+    export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
+    source /usr/share/git-core/contrib/completion/git-prompt.sh
+fi
 
 # Aliases & Environment Variables
 export CLICOLOR=1
