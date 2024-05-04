@@ -1,4 +1,5 @@
 # Alias definitions for zsh on macOS
+alias lsl='lsd -l --git'
 alias ls='lsd -lh --git'
 alias ll='lsd -lah --git'
 alias la='lsd -a --git'
