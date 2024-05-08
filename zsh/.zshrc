@@ -46,7 +46,7 @@ export LSCOLORS=ExFxBxDxCxegedabagacad
 #alias lsl='ls -laGFh'
 #alias ll='ls -laG'
 #alias c='clear'
-alias ob='cd ~/github/md-vaults/digital-garden/ && ls -l'
+alias ob='cd ~/notes/digital-garden/ && ls -l'
 
 # Load Additional Configurations
 if [[ -f ~/dotfiles/zsh/.zsh-aliases ]]; then
