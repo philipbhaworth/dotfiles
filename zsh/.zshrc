@@ -32,9 +32,12 @@ export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m') # Begin underline
 if command -v starship >/dev/null 2>&1; then
     eval "$(starship init zsh)"
 else
-    # Define a fallback prompt if Starship is not installed
-    export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
+    # Source the git-prompt.sh for Git repository status in the prompt
+    # https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
     source /usr/share/git-core/contrib/completion/git-prompt.sh
+
+    # Define a fallback prompt if Starship is not installed
+    export PS1="%{$fg_bold[magenta]%}%n@%m%{$reset_color%} %{$fg_bold[yellow]%}%~%{$reset_color%} %{$fg_bold[cyan]%}\$(__git_ps1 '(%s)')%{$reset_color%} %{$fg_bold[magenta]%}❯%{$reset_color%} "
 fi
 
 # Aliases & Environment Variables
