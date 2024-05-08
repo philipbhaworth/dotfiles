@@ -42,6 +42,7 @@ cask "visual-studio-code"
 # cask "warp"
 cask "logi-options-plus"
 cask "stats"
+cask "zed"
 
 # Install Mac App Store apps
 mas "Save to Raindrop.io", id: 1549370672
