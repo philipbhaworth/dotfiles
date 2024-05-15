@@ -5,13 +5,13 @@ tap "homebrew/cask-fonts"
 
 # Install command-line utilities
 brew "bat"
-brew "micro"
+# brew "micro"
 brew "bottom"
 brew "thefuck"
 brew "duf"
 brew "neofetch"
 brew "tmux"
-brew "lsd"
+# brew "lsd"
 brew "ripgrep"
 brew "tree"
 brew "htop"
@@ -31,32 +31,32 @@ cask "alacritty"
 cask "alt-tab"
 cask "appcleaner"
 cask "bbedit"
-# cask "cleanshot"
+cask "cleanshot"
 # cask "coteditor"
 cask "hiddenbar"
 cask "obsidian"
-cask "shottr"
+# cask "shottr"
 cask "signal"
 cask "sublime-text"
 cask "visual-studio-code"
 # cask "warp"
+cask "wezterm"
 cask "logi-options-plus"
 cask "stats"
 cask "zed"
 
 # Install Mac App Store apps
 mas "Save to Raindrop.io", id: 1549370672
-mas "Simplenote", id: 692867256
 mas "Hand Mirror", id: 1502839586
 mas "Drafts", id: 1435957248
 mas "Tot", id: 1491071483
 mas "TickTick", id: 966085870
-mas "UpNote", id: 1398373917
-mas "Todoist", id: 585829637
+# mas "UpNote", id: 1398373917
+# mas "Todoist", id: 585829637
 mas "Pure Paste", id: 1611378436
 mas "1Password for Safari", id: 1569813296
 mas "TextSniper", id: 1528890965
-mas "Calendar 366 II", id: 1265895169
-mas "Maccy", id: 1527619437
-mas "CotEditor", id: 1024640650
+# mas "Calendar 366 II", id: 1265895169
+# mas "Maccy", id: 1527619437
+# mas "CotEditor", id: 1024640650
 mas "Hidden Bar", id: 1452453066
