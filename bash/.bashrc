@@ -80,7 +80,7 @@ fi
 export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
 
 # Source Git prompt script for __git_ps1 in PS1 (if not using Starship)
-source /usr/share/git-core/contrib/completion/git-prompt.sh
+# source /usr/share/git-core/contrib/completion/git-prompt.sh
 
 # Initialize Starship, if available
 if command -v starship >/dev/null 2>&1; then
