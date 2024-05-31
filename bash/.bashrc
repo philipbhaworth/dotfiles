@@ -1,57 +1,113 @@
-# Common setup for both Fedora and Debian/Ubuntu
+# ====================
+# My .bashrc file
+# Description: Configuration file for bash shell settings including environment paths, history control, and an enhanced Git prompt.
+# ====================
 
+# ~~~~~~~~~~~~~~~ Basic Setup ~~~~~~~~~~~~~~~~~~~~~~~~
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# Prevent ranger from loading the default rc.conf
-export RANGER_LOAD_DEFAULT_RC=FALSE
+# ~~~~~~~~~~~~~~~ Path Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+# Add user-specific paths
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH="$PATH:$HOME/scripts"
+export PATH="$PATH:$HOME/.local/opt/nvim-linux64/bin"
+export PATH="$PATH:$HOME/opt"
 
-# Source global definitions (Fedora specific, but harmless on Debian/Ubuntu)
-if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
-fi
-
-# User specific environment
-if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
-    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
-fi
-export PATH
-
-# History control (Debian/Ubuntu specific, but useful in any distro)
+# ~~~~~~~~~~~~~~~ History Control ~~~~~~~~~~~~~~~~~~~~~~~~
 HISTCONTROL=ignoreboth
 shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 shopt -s checkwinsize
 
-# Make less more friendly for non-text input files, and setup for fancy prompt
+# ~~~~~~~~~~~~~~~ Less Setup ~~~~~~~~~~~~~~~~~~~~~~~~
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 force_color_prompt=yes
 
-# Detect the distribution and apply specific settings
-if [ -f /etc/debian_version ]; then
-    # Debian/Ubuntu-specific configurations
-    alias update='sudo apt update && sudo apt upgrade'
-    # Custom Debian/Ubuntu PATH additions
-    export PATH="$HOME/scripts:$PATH"
-    export PATH="$HOME/.local/opt/nvim-linux64/bin:$PATH"
-    export PATH="$HOME/opt:$PATH"
-elif [ -f /etc/fedora-release ]; then
-    # Fedora-specific configurations
-    alias update='sudo dnf update'
-    # Fedora specific alias or PATH adjustments can go here
+# ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+# Custom prompt
+export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
+
+# Initialize Starship, if available
+if command -v starship >/dev/null 2>&1; then
+    eval "$(starship init bash)"
 fi
 
-# Shared aliases and functions
-if [ -f ~/dotfiles/bash/.bash-aliases ]; then
-    . ~/dotfiles/bash/.bash-aliases
-fi
-if [ -f ~/dotfiles/bash/.bash-functions ]; then
-    . ~/dotfiles/bash/.bash-functions
-fi
+# ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
+# File management
+alias ls='ls -lh --color=auto'
+alias ll='ls -lah --color=auto'
+alias la='ls -a --color=auto'
+alias l='ls -lbGF --color=auto'
+
+# Directory navigation
+alias ob='cd ~/notes/digital-garden/ && ls -l --color=auto'
+
+# System utilities
+alias df='df -h'
+alias du='du -h -c'
+alias free='free -m'
+
+# Network operations
+alias ping='ping -c 5'
+
+# Misc
+alias grep='grep --color=auto'
+alias mkdir='mkdir -pv'
+
+# Enhanced navigation and file management
+alias dot='cd ~/dotfiles && ll'
+alias config='cd ~/.config && ll'
+alias tree='tree -C'
+alias h='history'
+alias c='clear'
+alias path='echo -e ${PATH//:/\\n}'
+
+# Quick editing of config files
+alias edbashrc='vim ~/.bashrc'
+alias edvimrc='vim ~/dots/vim-config/.vimrc'
+alias edalias='vim ~/dots/bash/.bash-aliases'
+
+# System monitoring and performance
+alias top='htop'
+alias meminfo='free -h --si'
+alias cpuinfo='lscpu'
+alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT'
+
+# Git shortcuts
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit -m'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias glog='git log --oneline --graph --decorate'
+alias gblame='git blame --show-name --show-number'
+
+# app/package specific
+alias geanydark='GTK_THEME=Adwaita:dark geany & disown'
+
+# Safety features
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Notification for long-running commands
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# ~~~~~~~~~~~~~~~ Additional Configurations ~~~~~~~~~~~~~~~~~~~~~~~~
+# Source additional aliases and functions (commented out)
+# if [ -f ~/dotfiles/bash/.bash-aliases ]; then
+#     . ~/dotfiles/bash/.bash-aliases
+# fi
+# if [ -f ~/dotfiles/bash/.bash-functions ]; then
+#     . ~/dotfiles/bash/.bash-functions
+# fi
 if [ -d ~/.bashrc.d ]; then
     for rc in ~/.bashrc.d/*; do
         if [ -f "$rc" ]; then
@@ -61,35 +117,14 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
-# Programmable completion features (only if not turned on globally)
+# ~~~~~~~~~~~~~~~ Programmable Completion ~~~~~~~~~~~~~~~~~~~~~~~~
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi
 
-## Additional setup for fancy prompt, completion, etc., can be added here
-# This line is commented out because Starship will override it anyway
-# PS1='\[\e[32m\]\u@\h:\[\e[34m\]\w\[\e[31m\]$(git branch 2>/dev/null | grep "^*" | colrm 1 2)\[\e[00m\] \$ '
-
-# Define a custom prompt
-# This is a fallback or example and will be overridden by Starship
-# It's good to have in case Starship is not installed or fails to initialize
-export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
-
-# Source Git prompt script for __git_ps1 in PS1 (if not using Starship)
-# source /usr/share/git-core/contrib/completion/git-prompt.sh
-
-# Initialize Starship, if available
-if command -v starship >/dev/null 2>&1; then
-    eval "$(starship init bash)"
-fi
-
-# Add your export statement here
-export "MICRO_TRUECOLOR=1"
-
-# Example for sourcing additional configurations
-# Ensure this is at the end of your .bashrc file for any final overrides or additions
-# source /home/yourusername/.config/broot/launcher/bash/br
+# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+export MICRO_TRUECOLOR=1
