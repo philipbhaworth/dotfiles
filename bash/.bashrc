@@ -14,7 +14,6 @@ esac
 # Add user-specific paths
 export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/scripts"
-export PATH="$PATH:$HOME/.local/opt/nvim-linux64/bin"
 export PATH="$PATH:$HOME/opt"
 
 # ~~~~~~~~~~~~~~~ History Control ~~~~~~~~~~~~~~~~~~~~~~~~
