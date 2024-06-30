@@ -1,15 +1,19 @@
 # Alias definitions for zsh on macOS
-# alias lsl='lsd -l --git'
-# alias ls='lsd -lh --git'
-# alias ll='lsd -lah --git'
-# alias la='lsd -a --git'
-# alias l='lsd -lbGF --git'
 
-alias lsl='ls -l --git'
-alias ls='ls -lh --git'
-alias ll='ls -lah --git'
-alias la='ls -a --git'
-alias l='ls -lbGF --git'
+# Check if lsd is available and define aliases accordingly
+#if command -v lsd >/dev/null 2>&1; then
+#    alias lsl='lsd -l --git'
+#    alias ls='lsd -lh --git'
+#    alias ll='lsd -lah --git'
+#    alias la='lsd -a --git'
+#    alias l='lsd -lbGF --git'
+#else
+    alias lsl='ls -l'
+    alias ls='ls -lh'
+    alias ll='ls -lah'
+    alias la='ls -a'
+    alias l='ls -lbGF'
+#fi
 
 # System utilities
 alias df='df -h'

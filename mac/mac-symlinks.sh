@@ -6,10 +6,10 @@ create_symlinks() {
 
     # Array of source and destination pairs
     declare -A symlinks=(
-        ["$HOME/dotfiles/zsh/.zshrc"]="$HOME/.zshrc"
-        ["$HOME/dotfiles/.config/alacritty"]="$HOME/.config/alacritty"
-        ["$HOME/dotfiles/.config/starship.toml"]="$HOME/.config/starship.toml"
-        ["/Users/hawrth/dotfiles/terminal/.wezterm.lua"]="/Users/hawrth/.wezterm.lua"
+        ["$HOME/dots/zsh/.zshrc"]="$HOME/.zshrc"
+        ["$HOME/dots/.config/alacritty"]="$HOME/.config/alacritty"
+        ["$HOME/dots/.config/starship.toml"]="$HOME/.config/starship.toml"
+        ["$HOME/dots/terminal/.wezterm.lua"]="$HOME/.wezterm.lua"
     )
 
     for src in "${!symlinks[@]}"; do
