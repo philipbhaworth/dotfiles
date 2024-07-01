@@ -71,9 +71,9 @@ esac
 # export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
 
 # Initialize Starship, if available
-#if command -v starship >/dev/null 2>&1; then
-#   eval "$(starship init bash)"
-#fi
+if command -v starship >/dev/null 2>&1; then
+   eval "$(starship init bash)"
+fi
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
@@ -102,8 +102,8 @@ alias ..='cd ..'
 alias cd..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias dot='cd ~/dots && ll'
-alias dots='cd ~/dots && ll'
+alias dot='cd ~/dotfiles && ll'
+alias dots='cd ~/dotfiles && ll'
 alias config='cd ~/.config && ll'
 alias tree='tree -C'
 alias h='history'
@@ -112,7 +112,7 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Quick editing of config files
 alias edbashrc='vim ~/.bashrc'
-alias edvimrc='vim ~/dots/vim-config/.vimrc'
+alias edvimrc='vim ~/.vimrc'
 alias edalias='vim ~/dots/bash/.bash-aliases'
 alias reload='source ~/.bashrc'
 
