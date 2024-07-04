@@ -16,6 +16,7 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/scripts"
 export PATH="$PATH:$HOME/.local/opt/nvim-linux64/bin"
 export PATH="$PATH:$HOME/opt"
+export PATH="$HOME/dotfiles/scripts:$PATH"
 
 # ~~~~~~~~~~~~~~~ History Control ~~~~~~~~~~~~~~~~~~~~~~~~
 HISTCONTROL=ignoreboth
@@ -133,7 +134,7 @@ alias gco='git checkout'
 alias gb='git branch'
 alias glog='git log --oneline --graph --decorate'
 alias gblame='git blame --show-name --show-number'
-
+# alias gd = "!f() { git add . && git commit -m \"$1\" && git push origin main; }; f"
 
 # Safety features
 alias rm='rm -i'
