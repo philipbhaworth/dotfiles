@@ -123,6 +123,7 @@ alias cpuinfo='lscpu'
 alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT'
 
 # Git shortcuts
+alias gf='git fetch'
 alias gs='git status'
 alias ga='git add'
 alias gc='git commit -m'
