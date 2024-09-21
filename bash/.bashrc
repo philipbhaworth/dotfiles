@@ -72,9 +72,9 @@ esac
 # PS1='\[\033[01;37m\][\A] \[\033[01;32m\](\u) \[\033[01;34m\]| \w \[\033[00m\]$ '
 
 # Initialize Starship, if available
-#if command -v starship >/dev/null 2>&1; then
-#   eval "$(starship init bash)"
-#fi
+if command -v starship >/dev/null 2>&1; then
+   eval "$(starship init bash)"
+fi
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
