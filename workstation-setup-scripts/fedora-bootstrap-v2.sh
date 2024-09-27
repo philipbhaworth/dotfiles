@@ -4,7 +4,7 @@
 setup_dotfiles() {
     rm -f "$HOME/.bashrc"
     ln -s "$HOME/dotfiles/bash/.bashrc" "$HOME/.bashrc" || { echo "Failed to create symbolic link for .bashrc. Exiting."; exit 1; }
-    ln -s "$HOME/dotfiles/terminals/.wezterm.lua" "$HOME/.wezterm.lua" || { echo "Failed to create symbolic link for .wezterm.lua. Exiting."; exit 1; }
+    ln -s "$Home/dotfiles/.config/wezterm/.wezterm.lua ~/.wezterm.lua" "$HOME/.wezterm.lua" || { echo "Failed to create symbolic link for .wezterm.lua. Exiting."; exit 1; }
     ln -s "$HOME/dotfiles/vim-config/.vimrc" "$HOME/.vimrc" || { echo "Failed to create symbolic link for .vimrc. Exiting."; exit 1; }
     # Create .config symlinks
     ln -s "$HOME/dotfiles/.config/starship.toml" "$HOME/.config/starship.toml" || { echo "Failed to create symbolic link for starship.toml. Exiting."; exit 1; }
