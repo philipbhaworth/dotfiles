@@ -147,3 +147,4 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 #    done
 #fi
 
+source ~/path/to/fsh/fast-syntax-highlighting.plugin.zsh

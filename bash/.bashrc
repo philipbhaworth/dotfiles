@@ -171,4 +171,6 @@ if ! shopt -oq posix; then
 fi
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-export MICRO_TRUECOLOR=1
+export EDITOR="nvim"
+export VISUAL="nvim"
+
