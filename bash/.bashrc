@@ -92,7 +92,7 @@ alias du='du -h -c'
 alias free='free -m'
 
 # Network operations
-alias ping='ping -c 5'
+# alias ping='ping -c 5'
 
 # Misc
 alias grep='grep --color=auto'
