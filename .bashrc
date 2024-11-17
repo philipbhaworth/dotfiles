@@ -78,10 +78,17 @@ fi
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
-alias ls='ls -lh --color=auto'
-alias ll='ls -lah --color=auto'
-alias la='ls -a --color=auto'
-alias l='ls -lbGF --color=auto'
+#alias ls='ls -lh --color=auto'
+#alias ll='ls -lah --group-directories-first --color=auto'
+#alias la='ls -a --color=auto'
+#alias l='ls -lbGF --color=auto'
+
+# Use lsd for ls commands
+alias ls='lsd -lh'
+alias la='lsd -la'                     # List all files, including hidden ones
+alias ll='lsd -lah --group-dirs=none'  # Group files before directories
+alias l='lsd -lG --group-dirs=none'         # Long listing format
+
 
 # Directory navigation
 alias ob='cd ~/notes/digital-garden/ && ls -l --color=auto'
@@ -135,6 +142,7 @@ alias gb='git branch'
 alias glog='git log --oneline --graph --decorate'
 alias gblame='git blame --show-name --show-number'
 # alias gd = "!f() { git add . && git commit -m \"$1\" && git push origin main; }; f"
+alias gitdone='gitdone.sh'
 
 # Safety features
 alias rm='rm -i'
