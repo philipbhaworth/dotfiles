@@ -9,7 +9,7 @@ local config = wezterm.config_builder()
 -- config.color_scheme = 'AdventureTime'
 -- config.color_scheme = 'Catppuccin Mocha'
 -- config.color_scheme = 'Chalk'
-config.color_scheme = 'Dracula (Official)'
+--config.color_scheme = 'Dracula (Official)'
 -- config.color_scheme = 'Everforest Dark (Gogh)'
 -- config.color_scheme = 'Everforest Dark Hard (Gogh)'
 -- config.color_scheme = 'Google (dark) (terminal.sexy)'
@@ -23,6 +23,8 @@ config.color_scheme = 'Dracula (Official)'
 -- config.color_scheme = 'Monokai Pro (Gogh)'
 -- config.color_scheme = 'Monokai Pro Ristretto (Gogh)'
 -- config.color_scheme = 'Ocean Dark (Gogh)'
+--config.color_scheme = 'Rosé Pine Moon (base16)'
+config.color_scheme = 'Rosé Pine Moon (Gogh)'
 -- config.color_scheme = 'Tango (base16)'
 -- config.color_scheme = 'Tokyo Night'
 -- config.color_scheme = 'tokyonight'
@@ -34,7 +36,7 @@ config.font = wezterm.font_with_fallback({
   {family="Hack Nerd Font Mono", weight="Regular", stretch="Normal", style="Normal"},
   "JetBrains Mono", -- This is a fallback font
 })
-config.font_size = 13.0 -- Adjust the font size as needed
+config.font_size = 11.0 -- Adjust the font size as needed
 
 -- Optional: Set tab bar position
 --config.tab_bar_at_bottom = false -- Set true to move the tab bar to the bottom of the window
