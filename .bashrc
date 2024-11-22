@@ -30,6 +30,13 @@ shopt -s checkwinsize
 force_color_prompt=yes
 
 # ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+function parse_git_dirty {
+  [[ $(git status --porcelain 2> /dev/null) ]] && echo "*"
+}
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/ (\1$(parse_git_dirty))/"
+}
+
 # Color codes
 RED="\\[\\e[1;31m\\]"
 GREEN="\\[\\e[1;32m\\]"
@@ -42,7 +49,7 @@ ENDC="\\[\\e[0m\\]"
 
 # Set a two-line prompt. If accessing via ssh include 'ssh-session' message.
 if [[ -n "$SSH_CLIENT" ]]; then ssh_message="-ssh_session"; fi
-PS1="${MAGENTA}\t ${GREEN}\u ${WHITE}@ ${YELLOW}\h${RED}${ssh_message} ${WHITE}in ${BLUE}\w \n${CYAN}❯${ENDC} "
+PS1="${MAGENTA}\t ${GREEN}\u ${WHITE}@ ${YELLOW}\h${RED}${ssh_message} ${WHITE}in ${BLUE}\w$(parse_git_branch) \n${CYAN}❯${ENDC} "
 
 
 # PS1='\[\033[01;37m\][\A] \[\033[01;32m\](\u) \[\033[01;34m\]| \w \[\033[00m\]$ '

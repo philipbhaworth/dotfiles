@@ -68,8 +68,8 @@ install_core_packages() {
     printf "Core packages installation complete.\n"
     
     # Install Starship prompt
-    printf "Installing Starship prompt...\n"
-    curl -sS https://starship.rs/install.sh | sh > /dev/null || { echo "Failed to install Starship. Exiting."; exit 1; }
+    #printf "Installing Starship prompt...\n"
+    #curl -sS https://starship.rs/install.sh | sh > /dev/null || { echo "Failed to install Starship. Exiting."; exit 1; }
     
     # Create symlink for bat
     mkdir -p ~/.local/bin
