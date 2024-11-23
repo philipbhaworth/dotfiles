@@ -155,6 +155,6 @@ if ! shopt -oq posix; then
 fi
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-export EDITOR="nvim"
-export VISUAL="nvim"
+#export EDITOR="nvim"
+#export VISUAL="nvim"
 
