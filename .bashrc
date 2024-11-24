@@ -54,16 +54,16 @@ fi
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
-#alias ls='ls -lh --color=auto'
-#alias ll='ls -lah --group-directories-first --color=auto'
-#alias la='ls -a --color=auto'
-#alias l='ls -lbGF --color=auto'
+alias ls='ls -lh --color=auto'
+alias ll='ls -lah --group-directories-first --color=auto'
+alias la='ls -a --color=auto'
+alias l='ls -lbGF --color=auto'
 
 # Use lsd for ls commands
-alias ls='lsd -lh'
-alias la='lsd -la'                     # List all files, including hidden ones
-alias ll='lsd -lah --group-dirs=none'  # Group files before directories
-alias l='lsd -lG --group-dirs=none'         # Long listing format
+#alias ls='lsd -lh'
+#alias la='lsd -la'                     # List all files, including hidden ones
+#alias ll='lsd -lah --group-dirs=none'  # Group files before directories
+#alias l='lsd -lG --group-dirs=none'         # Long listing format
 
 
 # Directory navigation
@@ -155,6 +155,6 @@ if ! shopt -oq posix; then
 fi
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-export EDITOR="nvim"
-export VISUAL="nvim"
+#export EDITOR="nvim"
+#export VISUAL="nvim"
 
