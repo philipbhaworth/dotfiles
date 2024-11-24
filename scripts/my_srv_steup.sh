@@ -45,6 +45,10 @@ setup_ssh_keys() {
     eval "$(ssh-agent -s)"
     ssh-add "$ssh_dir/$key_name"
     printf "SSH key added to agent.\n"
+
+    # Clone dotfiles repo
+    git clone git@github.com:philipbhaworth/dotfiles.git
+    printif "Cloning dots"
 }
 
 # Function: Remove and create symbolic links for dotfiles
