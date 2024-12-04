@@ -2,10 +2,17 @@
 
 # Import theme configurations (uncomment the theme you want to use)
 import = [
-  # "~/dotfiles/.config/alacritty/catppuccin-latte.toml",  # Catppuccin Latte
-  # "~/.config/alacritty/catppuccin-frappe.toml",       # Catppuccin Frappe
-  # "~/.config/alacritty/catppuccin-macchiato.toml",   # Catppuccin Macchiato
-  "~/dotfiles/.config/alacritty/catppuccin-mocha.toml"        # Catppuccin Mocha
+  #    "~/dotfiles/.config/alacritty/themes/ayu_mirage.toml"
+  #    "~/dotfiles/.config/alacritty/themes/baitong.toml"
+  #    "~/dotfiles/.config/alacritty/themes/catppuccin_mocha.toml"
+  #    "~/dotfiles/.config/alacritty/themes/dracula.toml"
+  #    "~/dotfiles/.config/alacritty/themes/everforest_dark.toml"
+  #    "~/dotfiles/.config/alacritty/themes/gruvbox_dark.toml"
+  #    "~/dotfiles/.config/alacritty/themes/horizon_dark.toml"
+  #    "~/dotfiles/.config/alacritty/themes/papercolor_dark.toml"
+  #    "~/dotfiles/.config/alacritty/themes/rose_pine_moon.toml"
+  #    "~/dotfiles/.config/alacritty/themes/tokyo_night.toml"
+    "~/dotfiles/.config/alacritty/themes/thelovelace.toml"
 ]
 
 # Shell settings

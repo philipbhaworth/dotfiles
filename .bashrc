@@ -45,12 +45,13 @@ if [[ -n "$SSH_CLIENT" ]]; then ssh_message="-ssh_session"; fi
 PS1="${MAGENTA}\t ${GREEN}\u ${WHITE}@ ${YELLOW}\h${RED}${ssh_message} ${WHITE}in ${BLUE}\w \n${CYAN}❯${ENDC} "
 
 
-# PS1='\[\033[01;37m\][\A] \[\033[01;32m\](\u) \[\033[01;34m\]| \w \[\033[00m\]$ '
+#PS1='\[\033[01;37m\][\A] \[\033[01;32m\](\u) \[\033[01;34m\]| \w \[\033[00m\]$ '
 
 # Initialize Starship, if available
 if command -v starship >/dev/null 2>&1; then
    eval "$(starship init bash)"
 fi
+
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
