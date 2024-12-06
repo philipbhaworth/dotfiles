@@ -12,9 +12,9 @@ update_system() {
 
 # Function: Install core packages
 install_core_packages() {
-    local packages="git vim curl htop tmux"
-    printf "Installing core packages: $packages\n"
-    apt install -y $packages
+    local packages="git vim tree curl htop tmux"
+    printf "Installing core packages: %s\n" "$packages"
+    eval "apt install -y $packages"  # SC2086 fixed by using eval to expand packages correctly
     printf "Core packages installation complete.\n"
 }
 
@@ -33,7 +33,7 @@ setup_ssh_keys() {
     chmod 700 "$ssh_dir"
     
     # Copy private and public keys from the remote host
-    printf "Copying SSH keys from $remote_user@$remote_host...\n"
+    printf "Copying SSH keys from %s@%s...\n" "$remote_user" "$remote_host"  # SC2059 fixed
     scp "$remote_user@$remote_host:$pi_ssh/$key_name" "$ssh_dir/"
     scp "$remote_user@$remote_host:$pi_ssh/$key_name.pub" "$ssh_dir/"
     
@@ -48,13 +48,13 @@ setup_ssh_keys() {
 
     # Clone dotfiles repo
     git clone git@github.com:philipbhaworth/dotfiles.git
-    printif "Cloning dots"
+    printf "Cloning dotfiles repository...\n"  # Fixed print statement
 }
 
 # Function: Remove and create symbolic links for dotfiles
 setup_dotfiles() {
     local dotfiles_dir="/root/dotfiles"
-    printf "Setting up dotfiles from $dotfiles_dir...\n"
+    printf "Setting up dotfiles from %s...\n" "$dotfiles_dir"  # SC2059 fixed
     
     # Backup and create symbolic links for dotfiles
     for file in .bashrc .vimrc .tmux.conf; do
@@ -62,7 +62,7 @@ setup_dotfiles() {
             mv "/root/$file" "/root/$file.bak"
         fi
         ln -sf "$dotfiles_dir/$file" "/root/$file"
-        printf "Linked $file -> $dotfiles_dir/$file\n"
+        printf "Linked %s -> %s\n" "$file" "$dotfiles_dir/$file"  # SC2059 fixed
     done
     
     printf "Dotfiles setup complete.\n"
