@@ -1,0 +1,6 @@
+--target=$HOME
+--ignore=nerd-fonts
+--ignore=scripts
+--ignore=.directory
+--ignore=.stowrc
+--restow

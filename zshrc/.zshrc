@@ -145,7 +145,7 @@ alias grep='grep --color=auto'
 #alias mkdir='mkdir -pv'
 
 # Reload the .zshrc file
-alias reload='source ~/.config/zshrc/.zshrc'
+alias reload='source ~/.zshrc'
 
 # Enhanced navigation and file management
 alias dow='cd ~/Downloads && ll'
