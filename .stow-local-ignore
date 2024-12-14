@@ -2,6 +2,7 @@
 .git
 .gitignore
 .gitmodules
+.stow-local-ignore
 
 # Temporary and backup files
 .+~           # Emacs backup files
@@ -16,4 +17,4 @@
 
 # Fonts and large folders (optional)
 nerd-fonts    # Skip nerd-fonts directory if not required
-scriptsdo
+scripts

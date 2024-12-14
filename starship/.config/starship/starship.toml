@@ -2,13 +2,13 @@
 
 [time]
 disabled = false
-# format = '[\[ $time \]]($style) '
+format = '[\[ $time \]]($style) '
 time_format = '%T'
 
 
 [username]
 style_user = 'green bold'
 style_root = 'blue bold'
-# format = 'user: [$user]($style) '
+format = 'user: [$user]($style) '
 disabled = false
 show_always = true
