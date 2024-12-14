@@ -10,6 +10,7 @@ export PATH
 
 
 
+
 # ~~~~~~~~~~~~~~~ LS Colors ~~~~~~~~~~~~~~~~~~~~~~~~
 export LS_COLORS='di=34:ln=36:so=35:pi=33:ex=31:bd=34;46:cd=34;43:su=37;41:sg=30;43:tw=30;42:ow=30;43'
 
@@ -144,7 +145,7 @@ alias grep='grep --color=auto'
 #alias mkdir='mkdir -pv'
 
 # Reload the .zshrc file
-alias reload='source ~/.zshrc'
+alias reload='source ~/.config/zshrc/.zshrc'
 
 # Enhanced navigation and file management
 alias dow='cd ~/Downloads && ll'
@@ -158,7 +159,7 @@ alias c='clear'
 alias path='echo -e ${PATH//:/\\n}'
 
 # Quick editing of config files
-alias edzsh='vim ~/dotfiles/.zshrc'
+alias edzsh='vim ~/dotfiles/zshrc/.zshrc'
 alias edvim='vim ~/dotfiles/.vimrc'
 alias edtmu='vim ~/dotfiles/.tmux.conf'
 
@@ -194,9 +195,6 @@ alias man='man -P "less -s"'
 
 # Notification for long-running commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-# Miscellaneous aliases
-alias reload='source ~/.zshrc'
 
 # zsh-autosuggestions - https://github.com/zsh-users/zsh-autosuggestions
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
