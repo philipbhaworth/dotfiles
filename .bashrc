@@ -89,15 +89,16 @@ alias ....='cd ../../../'
 alias dot='cd ~/dotfiles && ll'
 alias dots='cd ~/dotfiles && ll'
 alias config='cd ~/.config && ll'
+alias dow='cd ~/Downloads && ll'
+alias down='cd ~/Downloads && ll'
 alias tree='tree -C'
 alias h='history'
 alias c='clear'
 alias path='echo -e ${PATH//:/\\n}'
 
 # Quick editing of config files
-alias edbashrc='vim ~/.bashrc'
-alias edvimrc='vim ~/.vimrc'
-alias edalias='vim ~/dots/bash/.bash-aliases'
+alias edbash='vim ~/.bashrc'
+alias edvim='vim ~/.vimrc'
 alias reload='source ~/.bashrc'
 
 # System monitoring and performance
@@ -107,6 +108,7 @@ alias cpuinfo='lscpu'
 alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT'
 
 # Git shortcuts
+alias lg='lazygit'
 alias gf='git fetch'
 alias gs='git status'
 alias ga='git add'
