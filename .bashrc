@@ -16,7 +16,6 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH="$PATH:$HOME/scripts"
 export PATH="$PATH:$HOME/.local/opt/nvim-linux64/bin"
 export PATH="$PATH:$HOME/opt"
-export PATH="$HOME/dotfiles/scripts:$PATH"
 
 # ~~~~~~~~~~~~~~~ History Control ~~~~~~~~~~~~~~~~~~~~~~~~
 HISTCONTROL=ignoreboth
@@ -40,34 +39,39 @@ CYAN="\\[\\e[1;36m\\]"
 WHITE="\\[\\e[1;37m\\]"
 ENDC="\\[\\e[0m\\]"
 
-# Set a two-line prompt. If accessing via ssh include 'ssh-session' message.
+# Set a two-line prompt. If accessing via ssh, include 'ssh-session' message.
 if [[ -n "$SSH_CLIENT" ]]; then ssh_message="-ssh_session"; fi
 PS1="${MAGENTA}\t ${GREEN}\u ${WHITE}@ ${YELLOW}\h${RED}${ssh_message} ${WHITE}in ${BLUE}\w \n${CYAN}❯${ENDC} "
 
+# Terminal title (optional)
+case "$TERM" in
+xterm*|rxvt*)
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    ;;
+*)
+    ;;
+esac
 
-# PS1='\[\033[01;37m\][\A] \[\033[01;32m\](\u) \[\033[01;34m\]| \w \[\033[00m\]$ '
+
+# Custom prompt
+# export PS1="\[\e[38;5;201m\]\u@\h\[\e[m\] \[\e[38;5;214m\]\w\[\e[m\] \[\e[38;5;117m\]\$(__git_ps1 '(%s)')\[\e[m\] \[\e[38;5;201m\]❯\[\e[m\] "
 
 # Initialize Starship, if available
-if command -v starship >/dev/null 2>&1; then
-   eval "$(starship init bash)"
-fi
+#if command -v starship >/dev/null 2>&1; then
+#   eval "$(starship init bash)"
+#fi
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # File management
 alias ls='ls -lh --color=auto'
-alias ll='ls -lah --group-directories-first --color=auto'
+alias ll='ls -lah --color=auto'
 alias la='ls -a --color=auto'
 alias l='ls -lbGF --color=auto'
-
-# Use lsd for ls commands
-#alias ls='lsd -lh'
-#alias la='lsd -la'                     # List all files, including hidden ones
-#alias ll='lsd -lah --group-dirs=none'  # Group files before directories
-#alias l='lsd -lG --group-dirs=none'         # Long listing format
+alias lld='ls -lah --color=auto --group-directories-first'
 
 
 # Directory navigation
-alias ob='cd ~/notes/digital-garden/ && ls -l --color=auto'
+alias ob='cd ~/Documents/digital-garden/ && ls -l --color=auto'
 
 # System utilities
 alias df='df -h'
@@ -75,7 +79,7 @@ alias du='du -h -c'
 alias free='free -m'
 
 # Network operations
-# alias ping='ping -c 5'
+#alias ping='ping -c 5'
 
 # Misc
 alias grep='grep --color=auto'
@@ -86,8 +90,8 @@ alias ..='cd ..'
 alias cd..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
-alias dot='cd ~/dotfiles && ll'
-alias dots='cd ~/dotfiles && ll'
+alias dot='cd ~/dots && ll'
+alias dots='cd ~/dots && ll'
 alias config='cd ~/.config && ll'
 alias dow='cd ~/Downloads && ll'
 alias down='cd ~/Downloads && ll'
@@ -97,6 +101,7 @@ alias c='clear'
 alias path='echo -e ${PATH//:/\\n}'
 
 # Quick editing of config files
+
 alias edbash='vim ~/.bashrc'
 alias edvim='vim ~/.vimrc'
 alias reload='source ~/.bashrc'
@@ -119,8 +124,11 @@ alias gco='git checkout'
 alias gb='git branch'
 alias glog='git log --oneline --graph --decorate'
 alias gblame='git blame --show-name --show-number'
-# alias gd = "!f() { git add . && git commit -m \"$1\" && git push origin main; }; f"
-alias gitdone='gitdone.sh'
+
+# Puppet Aliases
+# add repo name --wait to this command
+alias pedeploy='puppet-code deploy'
+alias pelogin='puppet-access login --lifetime=4h hawrth'
 
 # Safety features
 alias rm='rm -i'
@@ -131,13 +139,7 @@ alias mv='mv -i'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # ~~~~~~~~~~~~~~~ Additional Configurations ~~~~~~~~~~~~~~~~~~~~~~~~
-# Source additional aliases and functions (commented out)
-# if [ -f ~/dotfiles/bash/.bash-aliases ]; then
-#     . ~/dotfiles/bash/.bash-aliases
-# fi
-# if [ -f ~/dotfiles/bash/.bash-functions ]; then
-#     . ~/dotfiles/bash/.bash-functions
-# fi
+
 if [ -d ~/.bashrc.d ]; then
     for rc in ~/.bashrc.d/*; do
         if [ -f "$rc" ]; then
@@ -157,6 +159,5 @@ if ! shopt -oq posix; then
 fi
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-#export EDITOR="nvim"
-#export VISUAL="nvim"
+export MICRO_TRUECOLOR=1
 

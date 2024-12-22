@@ -45,10 +45,40 @@ set noswapfile
 " Enable mouse support
 set mouse=a
 
-" Color scheme (optional, you can choose one you like)
-
 " Better command-line completion
 set wildmenu
 
 " Set clipboard to use system clipboard
 set clipboard=unnamedplus
+
+" ==================================================
+"                 Plugin Management
+" ==================================================
+
+" Begin vim-plug configuration
+call plug#begin('~/.vim/plugged')
+
+" List of plugins goes here
+Plug 'vim-airline/vim-airline'        " Status line plugin
+Plug 'vim-airline/vim-airline-themes' " Optional: Themes for vim-airline
+
+" You can add more plugins here using the Plug command
+" Example:
+" Plug 'tpope/vim-fugitive'
+
+" Initialize plugin system
+call plug#end()
+" End vim-plug configuration
+
+" ==================================================
+"               Plugin-Specific Settings
+" ==================================================
+
+" Configure vim-airline
+let g:airline_powerline_fonts = 1          " Enable Powerline fonts
+let g:airline_theme = 'dark'               " Set the theme (optional)
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+
+" Optional: Additional vim-airline settings can be added here
+
