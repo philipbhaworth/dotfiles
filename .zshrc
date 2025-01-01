@@ -117,7 +117,7 @@ alias l='lsd -lG --group-dirs=none'         # Long listing format
 
 
 # Directory navigation
-alias ob='cd ~/Documents/digital-garden/ && ls -lh'
+alias ob='cd ~/notes/digital-garden/ && ls -lh'
 #alias od='cd /Users/hawrth/Library/CloudStorage/OneDrive\-UniversityofIowa && ls -lh'
 #alias rep='cd ~/repos/ && ls -lah'
 #alias repo='cd ~/repos/ && ls -lah'
@@ -159,7 +159,7 @@ alias c='clear'
 alias path='echo -e ${PATH//:/\\n}'
 
 # Quick editing of config files
-alias edzsh='vim ~/dotfiles/zshrc/.zshrc'
+alias edzsh='vim ~/dotfiles/.zshrc'
 alias edvim='vim ~/dotfiles/.vimrc'
 alias edtmu='vim ~/dotfiles/.tmux.conf'
 
@@ -182,8 +182,8 @@ alias gblame='git blame --show-name --show-number'
 
 # Puppet Aliases
 # add repo name --wait to this command
-alias pedeploy='puppet-code deploy'
-alias pelogin='puppet-access login --lifetime=4h hawrth'
+#alias pedeploy='puppet-code deploy'
+#alias pelogin='puppet-access login --lifetime=4h hawrth'
 
 # Safety features
 alias rm='rm -i'

@@ -61,6 +61,7 @@ call plug#begin('~/.vim/plugged')
 " List of plugins goes here
 Plug 'vim-airline/vim-airline'        " Status line plugin
 Plug 'vim-airline/vim-airline-themes' " Optional: Themes for vim-airline
+Plug 'sheerun/vim-polyglot'           " Language pack for syntax highlighting
 
 " You can add more plugins here using the Plug command
 " Example:
