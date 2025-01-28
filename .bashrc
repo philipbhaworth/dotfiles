@@ -69,21 +69,11 @@ alias la='ls -a --color=auto'
 alias l='ls -lbGF --color=auto'
 alias lld='ls -lah --color=auto --group-directories-first'
 
-
 # Directory navigation
 alias ob='cd ~/Documents/digital-garden/ && ls -l --color=auto'
 
-# System utilities
-alias df='df -h'
-alias du='du -h -c'
-alias free='free -m'
-
-# Network operations
-#alias ping='ping -c 5'
-
 # Misc
 alias grep='grep --color=auto'
-alias mkdir='mkdir -pv'
 
 # Enhanced navigation and file management
 alias ..='cd ..'
@@ -106,29 +96,8 @@ alias edbash='vim ~/.bashrc'
 alias edvim='vim ~/.vimrc'
 alias reload='source ~/.bashrc'
 
-# System monitoring and performance
-alias top='htop'
-alias meminfo='free -h --si'
-alias cpuinfo='lscpu'
-alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT'
-
 # Git shortcuts
 alias lg='lazygit'
-alias gf='git fetch'
-alias gs='git status'
-alias ga='git add'
-alias gc='git commit -m'
-alias gp='git push'
-alias gl='git pull'
-alias gco='git checkout'
-alias gb='git branch'
-alias glog='git log --oneline --graph --decorate'
-alias gblame='git blame --show-name --show-number'
-
-# Puppet Aliases
-# add repo name --wait to this command
-alias pedeploy='puppet-code deploy'
-alias pelogin='puppet-access login --lifetime=4h hawrth'
 
 # Safety features
 alias rm='rm -i'
@@ -159,5 +128,5 @@ if ! shopt -oq posix; then
 fi
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-export MICRO_TRUECOLOR=1
+
 

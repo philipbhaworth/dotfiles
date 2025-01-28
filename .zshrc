@@ -54,50 +54,6 @@ else
 fi
 
 
-# ~~~~~~~~~~~~~~~ fzf Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Enable fzf keybindings
-source <(fzf --zsh)
-
-# Environment variables for fzf (ignoring .git directories)
-export FZF_DEFAULT_COMMAND="find . -type f -not -path '*/.git/*'"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="find . -type d -not -path '*/.git/*'"
-
-# fzf Aliases and Functions
-# Fuzzy File Finder with preview (ignoring .git directories)
-#alias ff="fzf --preview 'bat --style=numbers --color=always {} || cat {}'"
-alias ff="fzf --preview 'bat --style=numbers --color=always {} || cat {}' --bind 'enter:execute(vim {})'"
-
-# Fuzzy Directory Navigation (ignoring .git directories)
-alias fd="cd \$(find . -type d -not -path '*/.git/*' | fzf)"
-
-# Git Branch Checkout
-alias fgb="git checkout \$(git branch --all | fzf)"
-
-# Git File Diff Viewer
-alias gf="git diff --name-only | fzf | xargs -o vim"
-
-# Search Git log
-alias gl="git log --oneline | fzf | awk '{print \$1}' | xargs git show"
-
-# Command History Search
-alias fh="history | fzf | awk '{print \$2}' | xargs zsh -c"
-
-# Process Killer
-alias fkill="ps -ef | fzf | awk '{print \$2}' | xargs kill -9"
-
-# Directory Bookmarks
-alias mark="pwd >> ~/.fzf-bookmarks"
-alias j="cat ~/.fzf-bookmarks | fzf | xargs cd"
-
-# Open files in Finder (macOS, ignoring .git directories)
-alias ffinder="open \$(find . -type f -not -path '*/.git/*' | fzf)"
-
-# SSH Connection Manager
-alias fssh="cat ~/.ssh/config | grep 'Host ' | awk '{print \$2}' | fzf | xargs ssh"
-
-
 # ~~~~~~~~~~~~~~~ Other Aliases & Configurations ~~~~~~~~~~~~~~~~~~~~~~~~
 
 export CLICOLOR=1
@@ -118,31 +74,13 @@ alias l='lsd -lG --group-dirs=none'         # Long listing format
 
 # Directory navigation
 alias ob='cd ~/notes/digital-garden/ && ls -lh'
-#alias od='cd /Users/hawrth/Library/CloudStorage/OneDrive\-UniversityofIowa && ls -lh'
-#alias rep='cd ~/repos/ && ls -lah'
-#alias repo='cd ~/repos/ && ls -lah'
-#alias repos='cd ~/repos/ && ls -lah'
-#alias my-vm='cd ~/repos/puppet_rs_vms/ && ls -lah'
 alias ..='cd ..'
 alias cd..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
-# SSH aliases
-#alias argon='ssh argon-itf-head.hpc.uiowa.edu'
-#alias endor='ssh endor.hpc.uiowa.edu'
-
-# System utilities
-alias df='df -h'
-alias du='du -h -c'
-alias free='free -m'
-
-# Network operations
-#alias ping='ping -c 5'
-
 # Misc
 alias grep='grep --color=auto'
-#alias mkdir='mkdir -pv'
 
 # Reload the .zshrc file
 alias reload='source ~/.zshrc'
@@ -163,27 +101,9 @@ alias edzsh='vim ~/dotfiles/.zshrc'
 alias edvim='vim ~/dotfiles/.vimrc'
 alias edtmu='vim ~/dotfiles/.tmux.conf'
 
-# System monitoring and performance
-alias meminfo='free -h --si'
-alias cpuinfo='lscpu'
-alias disks='lsblk -o NAME,FSTYPE,SIZE,MOUNTPOINT'
-
 # Git shortcuts
 alias lg='lazygit'
 alias gs='git status'
-alias ga='git add'
-#alias gc='git commit -m'
-#alias gp='git push'
-alias gl='git pull'
-alias gco='git checkout'
-alias gb='git branch'
-alias glog='git log --oneline --graph --decorate'
-alias gblame='git blame --show-name --show-number'
-
-# Puppet Aliases
-# add repo name --wait to this command
-#alias pedeploy='puppet-code deploy'
-#alias pelogin='puppet-access login --lifetime=4h hawrth'
 
 # Safety features
 alias rm='rm -i'
