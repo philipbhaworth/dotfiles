@@ -56,19 +56,19 @@ set clipboard=unnamedplus
 " ==================================================
 
 " Begin vim-plug configuration
-call plug#begin('~/.vim/plugged')
+"call plug#begin('~/.vim/plugged')
 
 " List of plugins goes here
-Plug 'vim-airline/vim-airline'        " Status line plugin
-Plug 'vim-airline/vim-airline-themes' " Optional: Themes for vim-airline
-Plug 'sheerun/vim-polyglot'           " Language pack for syntax highlighting
+"Plug 'vim-airline/vim-airline'        " Status line plugin
+"Plug 'vim-airline/vim-airline-themes' " Optional: Themes for vim-airline
+"Plug 'sheerun/vim-polyglot'           " Language pack for syntax highlighting
 
 " You can add more plugins here using the Plug command
 " Example:
 " Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
-call plug#end()
+"call plug#end()
 " End vim-plug configuration
 
 " ==================================================
@@ -76,10 +76,10 @@ call plug#end()
 " ==================================================
 
 " Configure vim-airline
-let g:airline_powerline_fonts = 1          " Enable Powerline fonts
-let g:airline_theme = 'dark'               " Set the theme (optional)
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline_powerline_fonts = 1          " Enable Powerline fonts
+"let g:airline_theme = 'dark'               " Set the theme (optional)
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
 
 " Optional: Additional vim-airline settings can be added here
 
