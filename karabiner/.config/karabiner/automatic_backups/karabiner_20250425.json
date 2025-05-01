@@ -67,7 +67,7 @@
                         ]
                     },
                     {
-                        "description": "Press twice caps_lock to activate caps_lock, hold to use as Hyper Key (⌃⌥⇧⌘)",
+                        "description": "Press twice caps_lock to activate caps_lock & otherwise held_down and use as CTRL",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -116,12 +116,7 @@
                                         }
                                     ]
                                 },
-                                "to_if_held_down": [
-                                    {
-                                        "key_code": "left_control",
-                                        "modifiers": ["left_shift", "left_option", "left_command"]
-                                    }
-                                ],
+                                "to_if_held_down": [{ "key_code": "left_control" }],
                                 "type": "basic"
                             }
                         ]
