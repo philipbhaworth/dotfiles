@@ -165,10 +165,10 @@ alt-shift-t = 'move-node-to-workspace T'
 9 = 2
 B = 1
 C = 2
-E = 1
+E = 2
 F = 2
 M = ['3', '2']
-N = 3
+N = ['3', '2']
 R = 1
 T = 1
 
