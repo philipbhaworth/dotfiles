@@ -1,20 +1,79 @@
 # ====================
-# My .zshrc file
-# Description: Configuration file for zsh shell settings including environment paths, LS colors, man page colors, and an enhanced Git prompt.
+# My .zshrc file - Optimized
+# Description: Configuration file for zsh shell settings
 # ====================
 
-# ~~~~~~~~~~~~~~~ Path Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
-export PATH="/Users/hawrth/Library/Python/3.12/bin:$PATH"
-PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
-export PATH
+# ~~~~~~~~~~~~~~~ Core Settings ~~~~~~~~~~~~~~~~~~~~~~~~
+# -- Path Configuration --
+# Add paths in single statement for better performance
+export PATH="/Users/hawrth/Library/Python/3.12/bin:/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
-
-
-
-# ~~~~~~~~~~~~~~~ LS Colors ~~~~~~~~~~~~~~~~~~~~~~~~
+# -- Set environment variables --
+export CLICOLOR=1
+export LSCOLORS=ExFxBxDxCxegedabagacad
 export LS_COLORS='di=34:ln=36:so=35:pi=33:ex=31:bd=34;46:cd=34;43:su=37;41:sg=30;43:tw=30;42:ow=30;43'
 
+# -- History Configuration --
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_FIND_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt INC_APPEND_HISTORY
+setopt EXTENDED_HISTORY
+
+# ~~~~~~~~~~~~~~~ Completion System ~~~~~~~~~~~~~~~~~~~~~~~~
+# Load completion only if needed (improved performance)
+autoload -Uz compinit
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+# Completion settings
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
+# ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+# Load Starship with fallback
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  # Simplified Prompt Setup with optimized color definitions
+  setopt PROMPT_SUBST
+
+  # Define colors once
+  typeset -A colors
+  colors[username]="%F{green}"
+  colors[hostname]="%F{yellow}"
+  colors[reset]="%f"
+  colors[prompt]="%F{white}"
+  colors[info]="%F{blue}"
+  colors[vcs]="%F{red}"
+
+  # SSH detection
+  [[ -n "$SSH_CLIENT" ]] && ssh_message="-ssh_session" || ssh_message=""
+
+  # Set prompt
+  PROMPT="
+  ${colors[prompt]}${colors[username]}%n ${colors[reset]}@ ${colors[hostname]}%m ${colors[vcs]}${ssh_message} ${colors[prompt]}in ${colors[info]}%~ ${colors[reset]}
+  ${colors[prompt]}❯${colors[reset]} "
+  RPROMPT="${colors[prompt]}[%@]${colors[reset]}"
+fi
+
 # ~~~~~~~~~~~~~~~ Man Page Colors ~~~~~~~~~~~~~~~~~~~~~~~~
+# Less settings for man pages
 export LESS='-R'
 export MANPAGER='less -s'
 export LESS_TERMCAP_mb=$(printf '\e[01;31m')
@@ -25,100 +84,69 @@ export LESS_TERMCAP_so=$(printf '\e[38;5;246m')
 export LESS_TERMCAP_ue=$(printf '\e[0m')
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m')
 
-# ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
-# Load Starship, if available
-if command -v starship >/dev/null 2>&1; then
-  eval "$(starship init zsh)"
-else
-  # Simplified Prompt Setup for Fallback using specified colors
-  setopt PROMPT_SUBST
+# ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~
+# Navigation helper - replaces multiple cd aliases
+up() {
+  cd $(printf "%0.0s../" $(seq 1 ${1:-1}))
+}
 
-  # Colors for various parts of the prompt
-  USERNAME_COLOR="%F{green}"        # Green for username
-  HOSTNAME_COLOR="%F{yellow}"       # Yellow for hostname
-  RESET_COLOR="%f"                  # Reset formatting
-  PROMPT_COLOR="%F{white}"          # White for main parts of the prompt
-  INFO_COLOR="%F{blue}"             # Blue for directory path
-  VCS_COLOR="%F{red}"               # Red for version control system info
+# Reload configuration - using a different name to avoid conflict with alias
+zsh_reload() {
+  source ~/.zshrc
+  echo "ZSH config reloaded!"
+}
 
-  # Set a two-line prompt. If accessing via ssh, include 'ssh-session' message.
-  if [[ -n "$SSH_CLIENT" ]]; then
-      ssh_message="-ssh_session"
-  fi
-  PROMPT="
-  ${PROMPT_COLOR}${USERNAME_COLOR}%n ${RESET_COLOR}@ ${HOSTNAME_COLOR}%m ${VCS_COLOR}${ssh_message} ${PROMPT_COLOR}in ${INFO_COLOR}%~ ${RESET_COLOR}
-  ${PROMPT_COLOR}❯${RESET_COLOR} "
-  RPROMPT="${PROMPT_COLOR}[%@]${RESET_COLOR}"  # Display the current time in 12-hour format with AM/PM
-
-  # No heavy Git status in fallback to improve performance
-fi
-
-
-# ~~~~~~~~~~~~~~~ Other Aliases & Configurations ~~~~~~~~~~~~~~~~~~~~~~~~
-
-export CLICOLOR=1
-export LSCOLORS=ExFxBxDxCxegedabagacad
-
-# File management
-#alias ls='ls -lh'
-#alias ll='ls -lah'
-#alias la='ls -a'
-#alias l='ls -lbGF'
-
-# Use lsd for ls commands
+# ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
+# File listing (using lsd for enhanced output)
 alias ls='lsd -lh'
-alias la='lsd -la'                     # List all files, including hidden ones
-alias ll='lsd -lah --group-dirs=none'  # Group files before directories
-alias l='lsd -lG --group-dirs=none'         # Long listing format
+alias la='lsd -la'
+alias ll='lsd -lah --group-dirs=none'
+alias l='lsd -lG --group-dirs=none'
 
-
-# Directory navigation
-alias ob='cd ~/notes/digital-garden/ && ls -lh'
-alias ..='cd ..'
-alias cd..='cd ..'
-alias ...='cd ../../'
-alias ....='cd ../../../'
-
-# Misc
-alias grep='grep --color=auto'
-
-# Reload the .zshrc file
-alias reload='source ~/.zshrc'
-
-# Enhanced navigation and file management
+# Navigation shortcuts
+alias ob='cd ~/notes/digital-garden/ && ls'
 alias dow='cd ~/Downloads && ll'
-alias down='cd ~/Downloads && ll'
-alias dot='cd ~/dotfiles && ll'
-alias dots='cd ~/dotfiles && ll'
+alias dot='cd ~/git/dotfiles && ll'
 alias config='cd ~/.config && ll'
-alias tree='tree -C'
-alias h='history'
-alias c='clear'
-alias path='echo -e ${PATH//:/\\n}'
-
-# Quick editing of config files
-alias edzsh='vim ~/dotfiles/.zshrc'
-alias edvim='vim ~/dotfiles/.vimrc'
-alias edtmu='vim ~/dotfiles/.tmux.conf'
-
-# Git shortcuts
-alias lg='lazygit'
-alias gs='git status'
 
 # Safety features
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Quick access to documentation
-alias man='man -P "less -s"'
+# Utilities
+alias grep='grep --color=auto'
+alias tree='tree -C'
+alias h='history'
+alias c='clear'
+alias path='echo -e ${PATH//:/\\n}'
+alias reload='source ~/.zshrc'
 
-# Notification for long-running commands
+# Config editing
+alias edzsh='vim ~/git/dotfiles/.zshrc'
+alias edvim='vim ~/git/dotfiles/.vimrc'
+alias edtmu='vim ~/git/dotfiles/.tmux.conf'
+
+# Git shortcuts
+alias lg='lazygit'
+alias gs='git status'
+
+# Notification for long commands
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# zsh-autosuggestions - https://github.com/zsh-users/zsh-autosuggestions
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# ~~~~~~~~~~~~~~~ Plugins ~~~~~~~~~~~~~~~~~~~~~~~~
+# Check for Homebrew before loading plugins
+if command -v brew >/dev/null 2>&1; then
+  # Load autosuggestions
+  if [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
+    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+  fi
 
-# zsh-syntax-highlighting - https://github.com/zsh-users/zsh-syntax-highlighting
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/opt/homebrew/share/zsh-syntax-highlighting/highlighters
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # Load syntax highlighting - load last for best performance
+  if [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
+    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$(brew --prefix)/share/zsh-syntax-highlighting/highlighters"
+    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  fi
+fi
+
+# ~~~~~~~~~~~~~~~ End of .zshrc ~~~~~~~~~~~~~~~~~~~~~~~~
