@@ -1,3 +1,40 @@
 # ~/.config/starship.toml
 
+# Save this in ~/.config/starship.toml
 
+# General prompt format
+format = """
+$username\
+$hostname\
+$ssh\
+$directory\
+$line_break\
+$character"""
+
+# Configure individual components
+[username]
+style = "green bold"
+format = "[$user]($style) "
+show_always = true
+
+[hostname]
+style = "yellow bold"
+format = "@ [$hostname]($style) "
+ssh_only = false
+disabled = false
+
+[directory]
+style = "blue bold"
+format = "in [$path]($style) "
+truncation_length = 3
+truncation_symbol = "…/"
+
+[character]
+success_symbol = "[❯](cyan bold)"
+error_symbol = "[❯](red bold)"
+
+# SSH indicator
+[ssh]
+symbol = ""
+format = "[- ssh_session](red bold) "
+disabled = false
