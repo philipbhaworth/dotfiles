@@ -1,40 +1,112 @@
 # ~/.config/starship.toml
 
-# Save this in ~/.config/starship.toml
-
 # General prompt format
 format = """
 $username\
 $hostname\
-$ssh\
+$shlvl\
+$kubernetes\
+$ansible\
 $directory\
+$git_branch\
+$git_status\
+$docker_context\
+$python\
 $line_break\
+$jobs\
 $character"""
 
-# Configure individual components
+# Set prompt to be two lines
+[line_break]
+disabled = false
+
+# Show username
 [username]
-style = "green bold"
+style_user = "green bold"
+style_root = "red bold"
 format = "[$user]($style) "
 show_always = true
 
+# Show hostname
 [hostname]
-style = "yellow bold"
-format = "@ [$hostname]($style) "
 ssh_only = false
-disabled = false
+format = "@ [$hostname]($style) "
+style = "yellow bold"
+ssh_symbol = "[SSH]"
+trim_at = "."
 
+# Show SSH status clearly
+[shlvl]
+disabled = false
+format = "[$symbol]($style) "
+threshold = 1
+symbol = "*"
+style = "red bold"
+
+# Show current directory
 [directory]
-style = "blue bold"
-format = "in [$path]($style) "
 truncation_length = 3
-truncation_symbol = "…/"
+style = "blue bold"
+format = "in [$path]($style)[$read_only]($read_only_style) "
+read_only = " [RO]"
+truncation_symbol = "../"
 
+# Command character - changes color based on last command success
 [character]
-success_symbol = "[❯](cyan bold)"
-error_symbol = "[❯](red bold)"
+success_symbol = "[>](cyan bold)"
+error_symbol = "[>](red bold)"
+vimcmd_symbol = "[<](green bold)"
 
-# SSH indicator
-[ssh]
-symbol = ""
-format = "[- ssh_session](red bold) "
+# Git status info
+[git_branch]
+format = "on [$symbol$branch]($style) "
+symbol = "git:"
+style = "purple bold"
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "red bold"
+conflicted = "="
+ahead = "^${count}"
+behind = "v${count}"
+diverged = "<>^${ahead_count}v${behind_count}"
+untracked = "?"
+stashed = "S"
+modified = "M"
+staged = "+"
+renamed = "R"
+deleted = "D"
+
+# Show kubernetes context when in k8s environment
+[kubernetes]
+format = 'on [k8s:$context ($namespace)](blue bold) '
 disabled = false
+
+# Docker context
+[docker_context]
+format = "via [docker:$context](blue bold) "
+symbol = ""
+
+# Python environment
+[python]
+format = 'via [py:${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+detect_extensions = ["py"]
+style = "yellow bold"
+symbol = ""
+
+# Ansible indicator
+[custom.ansible]
+command = "if [[ -n $ANSIBLE_INVENTORY || -f ansible.cfg || -f playbook.yml || -f site.yml || -d roles || -d group_vars || -d host_vars ]]; then echo 'active'; fi"
+when = "exit 0"
+format = "via [ansible](red bold) "
+shell = ["bash", "--noprofile", "--norc", "-c"]
+detect_files = ["ansible.cfg", "playbook.yml", "site.yml"]
+detect_folders = ["roles", "group_vars", "host_vars"]
+
+# Jobs counter
+[jobs]
+format = "[$symbol$number]($style) "
+symbol = "jobs:"
+style = "bold blue"
+number_threshold = 1
+symbol_threshold = 1
