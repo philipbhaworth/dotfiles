@@ -1,112 +1,58 @@
 # ~/.config/starship.toml
 
-# General prompt format
-format = """
-$username\
-$hostname\
-$shlvl\
-$kubernetes\
-$ansible\
-$directory\
-$git_branch\
-$git_status\
-$docker_context\
-$python\
-$line_break\
-$jobs\
-$character"""
-
-# Set prompt to be two lines
-[line_break]
-disabled = false
+# Format with time properly included
+format = "$time$username @ $hostname $directory$git_branch$git_status$line_break$character"
 
 # Show username
 [username]
 style_user = "green bold"
 style_root = "red bold"
-format = "[$user]($style) "
+format = "[$user]($style)"
 show_always = true
 
 # Show hostname
 [hostname]
 ssh_only = false
-format = "@ [$hostname]($style) "
+format = "[$hostname]($style)"
 style = "yellow bold"
-ssh_symbol = "[SSH]"
-trim_at = "."
 
-# Show SSH status clearly
-[shlvl]
-disabled = false
-format = "[$symbol]($style) "
-threshold = 1
-symbol = "*"
-style = "red bold"
-
-# Show current directory
+# Directory
 [directory]
 truncation_length = 3
 style = "blue bold"
-format = "in [$path]($style)[$read_only]($read_only_style) "
-read_only = " [RO]"
+format = "in [$path]($style)"
 truncation_symbol = "../"
 
-# Command character - changes color based on last command success
+# Command character
 [character]
-success_symbol = "[>](cyan bold)"
-error_symbol = "[>](red bold)"
-vimcmd_symbol = "[<](green bold)"
+success_symbol = "❯"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "❮"
 
-# Git status info
+# Git branch - simple
 [git_branch]
-format = "on [$symbol$branch]($style) "
-symbol = "git:"
+format = " on [$symbol$branch]($style)"
+# symbol = "git:"
 style = "purple bold"
 
+# Git status - using Starship's default rich indicators
 [git_status]
 format = '([\[$all_status$ahead_behind\]]($style) )'
 style = "red bold"
 conflicted = "="
-ahead = "^${count}"
-behind = "v${count}"
-diverged = "<>^${ahead_count}v${behind_count}"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕"
 untracked = "?"
-stashed = "S"
-modified = "M"
+stashed = "$"
+modified = "!"
 staged = "+"
-renamed = "R"
-deleted = "D"
+renamed = "»"
+deleted = "✘"
 
-# Show kubernetes context when in k8s environment
-[kubernetes]
-format = 'on [k8s:$context ($namespace)](blue bold) '
+# Time module - ensuring it's enabled and properly formatted
+[time]
 disabled = false
-
-# Docker context
-[docker_context]
-format = "via [docker:$context](blue bold) "
-symbol = ""
-
-# Python environment
-[python]
-format = 'via [py:${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
-detect_extensions = ["py"]
-style = "yellow bold"
-symbol = ""
-
-# Ansible indicator
-[custom.ansible]
-command = "if [[ -n $ANSIBLE_INVENTORY || -f ansible.cfg || -f playbook.yml || -f site.yml || -d roles || -d group_vars || -d host_vars ]]; then echo 'active'; fi"
-when = "exit 0"
-format = "via [ansible](red bold) "
-shell = ["bash", "--noprofile", "--norc", "-c"]
-detect_files = ["ansible.cfg", "playbook.yml", "site.yml"]
-detect_folders = ["roles", "group_vars", "host_vars"]
-
-# Jobs counter
-[jobs]
-format = "[$symbol$number]($style) "
-symbol = "jobs:"
-style = "bold blue"
-number_threshold = 1
-symbol_threshold = 1
+format = '''[\[$time\]]($style) '''
+time_format = "%T"
+style = "cyan"                      # BlueViolet

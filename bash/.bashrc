@@ -101,6 +101,7 @@ alias ob='cd ~/notes/digital-garden/ && ls'
 alias dow='cd ~/Downloads && ll'
 alias dot='cd ~/git/dotfiles && ll'
 alias config='cd ~/.config && ll'
+alias repo='cd ~/git && ll'
 
 # Safety features
 alias rm='rm -i'
