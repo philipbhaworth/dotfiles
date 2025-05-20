@@ -54,7 +54,7 @@ else
   ENDC="\\[\\e[0m\\]"
 
   # SSH detection
-  [[ -n "$SSH_CLIENT" ]] && ssh_message="-ssh_session" || ssh_message=""
+  [[ -n "$SSH_CLIENT" ]] && ssh_message="[ssh_session]" || ssh_message=""
 
   # Set prompt
   PS1="
