@@ -40,25 +40,53 @@ export LESS_TERMCAP_ue=$(printf '\e[0m')
 export LESS_TERMCAP_us=$(printf '\e[04;38;5;146m')
 
 # ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+# Define colors once
+RED="\\[\\e[1;31m\\]"
+GREEN="\\[\\e[1;32m\\]"
+YELLOW="\\[\\e[1;33m\\]"
+BLUE="\\[\\e[1;34m\\]"
+PURPLE="\\[\\e[1;35m\\]"
+CYAN="\\[\\e[1;36m\\]"
+WHITE="\\[\\e[1;37m\\]"
+ENDC="\\[\\e[0m\\]"
+
+# Git branch and status function
+parse_git_branch() {
+  local branch=$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/')
+  if [ -n "$branch" ]; then
+    local git_status=$(git status --porcelain 2>/dev/null)
+
+    # Check for different types of changes with minimal commands
+    local staged_symbol=""
+    local unstaged_symbol=""
+
+    if echo "$git_status" | grep -q "^[MADRC]"; then
+      staged_symbol="+"
+    fi
+
+    if echo "$git_status" | grep -q "^.[MADRC]"; then
+      unstaged_symbol="*"
+    fi
+
+    # If clean, show check mark
+    if [[ -z "$staged_symbol" && -z "$unstaged_symbol" ]]; then
+      echo " git:(${branch} ✓)"
+    else
+      echo " git:(${branch} ${staged_symbol}${unstaged_symbol})"
+    fi
+  fi
+}
+
 # Load Starship with fallback
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
 else
-  # Define colors once
-  RED="\\[\\e[1;31m\\]"
-  GREEN="\\[\\e[1;32m\\]"
-  YELLOW="\\[\\e[1;33m\\]"
-  BLUE="\\[\\e[1;34m\\]"
-  CYAN="\\[\\e[1;36m\\]"
-  WHITE="\\[\\e[1;37m\\]"
-  ENDC="\\[\\e[0m\\]"
-
   # SSH detection
   [[ -n "$SSH_CLIENT" ]] && ssh_message="[ssh_session]" || ssh_message=""
 
   # Set prompt
   PS1="
-${GREEN}\u ${ENDC}@ ${YELLOW}\h ${RED}${ssh_message} ${WHITE}in ${BLUE}\w ${ENDC}
+${GREEN}\u ${ENDC}@ ${YELLOW}\h ${RED}${ssh_message} ${WHITE}in ${BLUE}\w ${PURPLE}\$(parse_git_branch)${ENDC}
 ${CYAN}❯${ENDC} "
 
   # Terminal title
