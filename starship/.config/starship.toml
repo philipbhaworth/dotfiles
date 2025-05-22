@@ -1,3 +1,58 @@
 # ~/.config/starship.toml
 
+# Format with time properly included
+format = "$time$username @ $hostname $directory$git_branch$git_status$line_break$character"
 
+# Show username
+[username]
+style_user = "green bold"
+style_root = "red bold"
+format = "[$user]($style)"
+show_always = true
+
+# Show hostname
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "yellow bold"
+
+# Directory
+[directory]
+truncation_length = 3
+style = "blue bold"
+format = "in [$path]($style)"
+truncation_symbol = "../"
+
+# Command character
+[character]
+success_symbol = "❯"
+error_symbol = "[❯](red)"
+vimcmd_symbol = "❮"
+
+# Git branch - simple
+[git_branch]
+format = " on [$symbol$branch]($style)"
+# symbol = "git:"
+style = "purple bold"
+
+# Git status - using Starship's default rich indicators
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "red bold"
+conflicted = "="
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕"
+untracked = "?"
+stashed = "$"
+modified = "!"
+staged = "+"
+renamed = "»"
+deleted = "✘"
+
+# Time module - ensuring it's enabled and properly formatted
+[time]
+disabled = false
+format = '''[\[$time\]]($style) '''
+time_format = "%T"
+style = "cyan"                      # BlueViolet
