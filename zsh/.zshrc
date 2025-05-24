@@ -106,8 +106,11 @@ alias l='lsd -lG --group-dirs=none'
 # Navigation shortcuts
 alias ob='cd ~/notes/digital-garden/ && ls'
 alias dow='cd ~/Downloads && ll'
-alias dot='cd ~/git/dotfiles && ll'
+alias dot='cd ~/repos/dotfiles && ll'
 alias config='cd ~/.config && ll'
+alias repo='cd ~/repos/ && ll'
+alias ansi='cd ~/repos/ansible/ && ll'
+
 
 # Safety features
 alias rm='rm -i'
