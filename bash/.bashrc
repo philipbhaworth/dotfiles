@@ -86,7 +86,7 @@ else
 
   # Set prompt
   PS1="
-${GREEN}\u${ENDC}@${YELLOW}\h - ${RED}${ssh_message} ${WHITE}in ${BLUE}\w ${PURPLE}\$(parse_git_branch)${ENDC}
+${WHITE}[\t] ${GREEN}\u${ENDC} @ ${YELLOW}\h-${RED}${ssh_message} ${WHITE}in ${BLUE}\w ${PURPLE}\$(parse_git_branch)${ENDC}
 ${CYAN}❯${ENDC} "
 
   # Terminal title
