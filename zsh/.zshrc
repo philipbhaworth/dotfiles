@@ -8,6 +8,12 @@
 # Add paths in single statement for better performance
 export PATH="/Users/hawrth/Library/Python/3.12/bin:/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
+# Load all executable scripts from dotfiles/scripts and subdirs
+export PATH="$HOME/dotfiles/scripts:$PATH"
+for dir in "$HOME/dotfiles/scripts"/*; do
+  [ -d "$dir" ] && export PATH="$dir:$PATH"
+done
+
 # -- Set environment variables --
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
