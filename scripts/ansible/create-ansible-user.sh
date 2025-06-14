@@ -6,7 +6,7 @@
 # After fresh Ubuntu install with your regular user, run these commands from your jump host:
 #
 # 1. Copy your public key to the server:
-#    scp ~/.ssh/ansible_id.pub user@SERVER_IP:/tmp/
+#    scp ~/.ssh/id_ed25519_ansible.pub user@SERVER_IP:/tmp/
 #
 # 2. Copy this script to the server:
 #    scp create-ansible-user.sh user@SERVER_IP:/tmp/
@@ -14,11 +14,11 @@
 # 3. SSH in and run the setup:
 #    ssh user@SERVER_IP
 #    sudo mkdir -p /home/ansible/.ssh
-#    sudo cp /tmp/ansible_id.pub /home/ansible/.ssh/authorized_keys
+#    sudo cp /tmp/id_ed25519_ansible.pub /home/ansible/.ssh/authorized_keys
 #    sudo bash /tmp/create-ansible-user.sh
 #
 # Or run all in one command:
-#    ssh user@SERVER_IP "sudo mkdir -p /home/ansible/.ssh && sudo cp /tmp/ansible_id.pub /home/ansible/.ssh/authorized_keys && sudo bash /tmp/create-ansible-user.sh"
+#    ssh user@SERVER_IP "sudo mkdir -p /home/ansible/.ssh && sudo cp /tmp/id_ed25519_ansible.pub /home/ansible/.ssh/authorized_keys && sudo bash /tmp/create-ansible-user.sh"
 #
 # Replace 'user' with your actual username (e.g., pbh) and SERVER_IP with target server IP
 
@@ -48,16 +48,16 @@ chmod 700 "/home/$ANSIBLE_USER/.ssh"
 chown $ANSIBLE_USER:$ANSIBLE_USER "/home/$ANSIBLE_USER/.ssh"
 
 # Check if authorized_keys exists (should be copied to /tmp beforehand)
-if [ ! -f "/tmp/ansible_id.pub" ]; then
-  echo "[!] ERROR: /tmp/ansible_id.pub not found"
+if [ ! -f "/tmp/id_ed25519_ansible.pub" ]; then
+  echo "[!] ERROR: /tmp/id_ed25519_ansible.pub not found"
   echo "[!] Copy your public key there first with:"
-  echo "    scp user@192.168.10.9:~/.ssh/ansible_id.pub /tmp/"
+  echo "    scp user@192.168.10.9:~/.ssh/id_ed25519_ansible.pub /tmp/"
   exit 1
 fi
 
 # Copy the public key to ansible user's authorized_keys
 echo "[+] Installing SSH public key"
-cp /tmp/ansible_id.pub "$AUTHORIZED_KEYS_FILE"
+cp /tmp/id_ed25519_ansible.pub "$AUTHORIZED_KEYS_FILE"
 
 # Set correct permissions on authorized_keys
 echo "[+] Setting authorized_keys permissions"
@@ -71,7 +71,7 @@ chmod 440 "/etc/sudoers.d/$ANSIBLE_USER"
 
 # Clean up temporary files
 echo "[+] Cleaning up temporary files"
-rm -f /tmp/ansible_id.pub /tmp/create-ansible-user.sh
+rm -f /tmp/id_ed25519_ansible.pub /tmp/create-ansible-user.sh
 
 echo "[✓] Ansible user setup complete"
 echo "[✓] You can now SSH as: ssh ansible@$(hostname -I | awk '{print $1}')"
