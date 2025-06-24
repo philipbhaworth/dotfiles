@@ -29,11 +29,11 @@ success_symbol = "❯"
 error_symbol = "[❯](red)"
 vimcmd_symbol = "❮"
 
-# Git branch - simple
 [git_branch]
 format = " on [$symbol$branch]($style)"
-# symbol = "git:"
 style = "purple bold"
+truncation_length = 20
+truncation_symbol = "…"
 
 # Git status - using Starship's default rich indicators
 [git_status]

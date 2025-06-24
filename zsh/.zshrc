@@ -9,8 +9,8 @@
 export PATH="/Users/hawrth/Library/Python/3.12/bin:/Applications/WezTerm.app/Contents/MacOS:$PATH"
 
 # Load all executable scripts from dotfiles/scripts and subdirs
-export PATH="$HOME/repos/dotfiles/scripts:$PATH"
-for dir in "$HOME/repos/dotfiles/scripts"/*; do
+export PATH="$HOME/dotfiles/scripts:$PATH"
+for dir in "$HOME/dotfiles/scripts"/*; do
   [ -d "$dir" ] && export PATH="$dir:$PATH"
 done
 
@@ -103,19 +103,21 @@ zsh_reload() {
 }
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
-# File listing (using lsd for enhanced output)
-alias ls='lsd -lh'
-alias la='lsd -la'
-alias ll='lsd -lah --group-dirs=none'
-alias l='lsd -lG --group-dirs=none'
+# lsd aliases (modern ls)
+alias ls='lsd --group-dirs first'
+alias ll='lsd -alh --group-dirs first'
+alias la='lsd -a --group-dirs first'
+alias l='lsd -lah --group-dirs first'
+alias lt='lsd --tree -a -I ".git|__pycache__|.mypy_cache|.ipynb_checkpoints"'
+alias ltt='lsd --tree -a -I ".git|__pycache__|.mypy_cache|.ipynb_checkpoints" --depth 2'
 
 # Navigation shortcuts
 alias ob='cd ~/notes/digital-garden/ && ls'
 alias dow='cd ~/Downloads && ll'
-alias dot='cd ~/repos/dotfiles && ll'
+alias dot='cd ~/dotfiles && ll'
 alias config='cd ~/.config && ll'
 alias repo='cd ~/repos/ && ll'
-alias ansi='cd ~/repos/ansible/ && ll'
+alias ansi='cd ~/repos/ansible-homelab/ && ll'
 
 
 # Safety features
@@ -159,3 +161,6 @@ if command -v brew >/dev/null 2>&1; then
 fi
 
 # ~~~~~~~~~~~~~~~ End of .zshrc ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Created by `pipx` on 2025-06-24 03:50:46
+export PATH="$PATH:/home/pbh/.local/bin"
