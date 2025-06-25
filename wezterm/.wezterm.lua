@@ -9,9 +9,11 @@ local config = wezterm.config_builder()
 -- config.color_scheme = 'catppuccin-frappe'
 -- config.color_scheme = 'Everforest Dark Medium (Gogh)'
 -- config.color_scheme = 'Everforest Dark Hard (Gogh)'
-config.color_scheme = "OneHalfDark"
+-- config.color_scheme = "OneHalfDark"
+config.color_scheme = "Nord (base16)"
 -- config.color_scheme = 'PaperColor Dark (base16)'
 -- config.color_scheme = 'Papercolor Dark (Gogh)'
+-- config.color_scheme = 'Tokyo Night Storm'
 
 -- Set the font and font size
 config.font = wezterm.font_with_fallback({
