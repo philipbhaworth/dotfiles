@@ -7,12 +7,23 @@
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
+# Load all executable scripts from dotfiles/scripts and subdirs
+export PATH="$HOME/dotfiles/scripts:$PATH"
+for dir in "$HOME/dotfiles/scripts"/*; do
+  [ -d "$dir" ] && export PATH="$dir:$PATH"
+done
+
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
 export CLICOLOR=1
 export LSCOLORS=ExFxBxDxCxegedabagacad
 export LS_COLORS='di=34:ln=36:so=35:pi=33:ex=31:bd=34;46:cd=34;43:su=37;41:sg=30;43:tw=30;42:ow=30;43'
 export EDITOR=vim
+export VISUAL=vim
 export PAGER=less
+
+# Tool customization
+export BAT_THEME="Nord"
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 
 # ~~~~~~~~~~~~~~~ History Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 HISTSIZE=10000
