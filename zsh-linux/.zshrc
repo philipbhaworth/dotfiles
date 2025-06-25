@@ -120,7 +120,8 @@ else
 fi
 
 # Navigation shortcuts
-alias homelab='cd ~/homelab-ansible && ll'
+alias dot='cd ~/dotfiles/ && ll'
+alias repo='cd ~/repos && ll'
 alias config='cd ~/.config && ll'
 alias logs='cd /var/log && ll'
 alias systemd='cd /etc/systemd/system && ll'
