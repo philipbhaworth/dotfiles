@@ -65,33 +65,37 @@ if command -v lazygit >/dev/null 2>&1; then
 fi
 
 # Maintenance
-alias reload='source ~/.zshrc && echo "Reloaded!"'
+alias reload='source ~/.zshrc'
 
 # macOS-specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
     alias brewup='brew update && brew upgrade && brew cleanup'
 fi
 
-# ~~~~~~~~~~~~~~~ Plugins (detect location) ~~~~~~~~~~~~~~~~~~~~~~~~
-# Autosuggestions
-if [[ "$OSTYPE" == "darwin"* ]] && [ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]; then
-    source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-elif [ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-    source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fi
+# ~~~~~~~~~~~~~~~ Plugins (cross-platform) ~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Syntax highlighting (load last)
-if [[ "$OSTYPE" == "darwin"* ]] && [ -f "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]; then
-    source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-elif [ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Autosuggestions
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    plugin_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+else
+    plugin_path="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
 fi
+[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-autosuggestions"
+
+# Syntax Highlighting
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    plugin_path="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+else
+    plugin_path="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+fi
+[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-syntax-highlighting"
+
 
 # ~~~~~~~~~~~~~~~ Atuin ~~~~~~~~~~~~~~~~~~~~~~~~
 if [ -f "$HOME/.atuin/bin/env" ]; then
     . "$HOME/.atuin/bin/env"
-    eval "$(atuin init zsh)"
+    if command -v atuin >/dev/null 2>&1; then
+        eval "$(atuin init zsh)" || echo "Warning: atuin init failed"
+    fi
 fi
 
-# ~~~~~~~~~~~~~~~ Local Customizations ~~~~~~~~~~~~~~~~~~~~~~~~
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
