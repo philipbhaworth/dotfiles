@@ -1,104 +1,96 @@
-# Dotfiles Repository
+# Dotfiles Repo
 
-Welcome to my dotfiles repository! This collection of configuration files and scripts is designed to simplify and automate the setup of my personal computing environment, making it as portable and efficient as possible.
+This repository contains personal configuration files (dotfiles) for various tools and environments, managed using [GNU Stow](https://www.gnu.org/software/stow/).
 
-## Table of Contents
-- [Dotfiles Repository](#dotfiles-repository)
-  - [Table of Contents](#table-of-contents)
-  - [Introduction](#introduction)
-  - [Repository Structure](#repository-structure)
-  - [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation Steps](#installation-steps)
-    - [Follow Prompts](#follow-prompts)
-  - [License](#license)
+## 📦 Structure
 
-## Introduction
-
-This repository contains configuration files (dotfiles) and scripts used to customize my command-line and desktop environment across different Linux Distros. The aim here is to create a setup that supports both my academic pursuits and personal life seamlessly. By sharing these dotfiles, I hope not only to keep my own environment easily replicable across different machines but also to assist others who might find my setup useful.Feel free to explore and adapt these configurations to suit your own preferences, that is how I am learning!
-
-## Repository Structure
-The repository is organized into several directories, each containing configurations for specific tools or applications:
+The repo is organized by tool/service. Each subdirectory is a stow package and contains config files that should be symlinked to your home directory.
 
 ```
-├── bash/
-│   ├── .bash-aliases  # Aliases to shorten command lines and improve efficiency.
-│   ├── .bash-functions  # Custom functions for the Bash shell.
-│   ├── .bashrc  # Main configuration file for Bash, setting up the shell environment.
-│   └── old-bash-versions/
-│       └── .bash-aliases-v1  # Older version of Bash aliases for compatibility.
-├── dotconfig/
-│   ├── geany/  # Configuration files and themes for the Geany text editor.
-│   ├── lsd/  # Configuration for LSD, the modern ls command.
-│   ├── ranger/  # Configuration files for the Ranger file manager.
-│   │   ├── commands_full.py  # Extended command definitions for Ranger.
-│   │   ├── commands.py  # Default command definitions for Ranger.
-│   │   ├── rc.conf  # Main Ranger configuration file.
-│   │   ├── rifle.conf  # File association configurations for Ranger.
-│   │   └── scope.sh  # Script for file preview within Ranger.
-│   ├── starship.toml  # Configuration for the Starship prompt in the shell.
-│   └── tilix/  # Configuration files for the Tilix terminal emulator.
-│       └── schemes/  # Color schemes for Tilix.
-├── .gitconfig  # Global Git configuration settings.
-├── neofetch/
-│   └── config.conf  # Configuration file for Neofetch, a system information tool.
-├── README.md  # Documentation for the repository, including setup and configuration.
-├── server-setup-scripts/
-│   ├── server-bootstrap.sh  # Script for initial server setup and configurations.
-│   └── ufw-config-script.sh  # Script for setting up Uncomplicated Firewall (UFW).
-├── terminals/
-│   └── .wezterm.lua  # Configuration for WezTerm, a GPU-accelerated terminal emulator.
-├── vim-config/
-│   └── .vimrc  # Configuration file for Vim, customizing the editor's behavior.
-└── workstation-setup-scripts/
-    ├── bootstrap-v3.sh  # Bootstrap script for setting up Fedora or Debian based systems.
-    ├── debian-bootstrap.sh  # Setup script for Debian-based systems.
-    ├── endeavor-bootstrap.sh  # Setup script for EndeavourOS, an Arch-based system.
-    ├── fedora-bootstrap.sh  # Setup script for Fedora systems.
-    ├── old-scripts/
-    │   ├── bootstrap-v1.sh  # Original bootstrap script for older system setups.
-    │   └── bootstrap-v2.sh  # Second version of the bootstrap script with updates.
-    └── opensuse-bootstrap.sh  # Setup script for openSUSE systems.
+dots/
+├── bash/          -> ~/.bashrc
+├── zsh/           -> ~/.zshrc
+├── tmux/          -> ~/.tmux.conf
+├── vim/           -> ~/.vimrc
+├── nvim/          -> ~/.config/nvim/
+├── starship/      -> ~/.config/starship/
+├── wezterm/       -> ~/.config/wezterm/
+├── yazi/          -> ~/.config/yazi/
+├── karabiner/     -> ~/.config/karabiner/
+├── aerospace/     -> ~/.config/aerospace/
+├── scripts/       -> ~/scripts/
+└── Brewfile       -> used for macOS Homebrew setup
 ```
 
-## Getting Started
+> **Note:** Files like `.gitconfig` or `Brewfile` can either be symlinked manually or wrapped in a subdirectory (e.g., `git/`) for Stow to handle.
 
-### Prerequisites
+---
 
-Before you begin, make sure you have:
-- **Git**: Needed for cloning this repository.
-- **Bash Shell**: Required to run the scripts.
+## ✅ Prerequisites
 
-### Installation Steps
+Install GNU Stow:
 
-1. **Clone the Repository**
+### On Linux
 
-   Start by cloning this repository into your home directory:
-   ```bash
-   git clone https://github.com/philipbhaworth/dotfiles.git ~/dotfiles
-   ```
+```bash
+sudo apt install stow         # Debian/Ubuntu
+# OR
+sudo pacman -S stow           # Arch
+# OR
+sudo dnf install stow         # Fedora
+```
 
-2. **Run the Bootstrap Script**
+### On macOS (via Homebrew)
 
-   Navigate to the `workstation-setup-scripts` directory and execute the bootstrap script:
-   ```bash
-   cd ~/dotfiles/workstation-setup-scripts/
-   ./bootstrap-v3.sh
-   ```
+```bash
+brew install stow
+```
 
-   This script will perform the following actions:
-   - Link dotfiles for bash, vim, and WezTerm.
-   - Update your system and install essential packages.
-   - Configure Git with your user information.
-   - Install selected applications via Flatpak.
+---
 
-### Follow Prompts
+## 🚀 Usage
 
-During the execution of the script, you may be prompted to:
-- Enter your **sudo password** for permissions.
-- Provide **Git configuration details** (user name and email).
+From the repo root:
 
-Please follow the on-screen instructions to complete the setup process.
+```bash
+stow <package>
+```
 
-## License
-This project is licensed under the [MIT License](LICENSE).
+Example:
+
+```bash
+stow bash
+stow zsh
+stow nvim
+```
+
+This creates symlinks from the files inside each package (like `bash/.bashrc`) to your home directory (`~/.bashrc`).
+
+To remove a stowed package:
+
+```bash
+stow -D <package>
+```
+
+---
+
+## 🗂️ Note on Nested Dotfile Directories
+
+If you're managing dotfiles from a **nested directory** (e.g., `~/dotfiles/`), and not directly from your home directory, you'll need to add the `-t` (target) flag:
+
+```bash
+stow -t ~ zsh
+stow -t ~ nvim
+```
+
+This ensures Stow places the symlinks correctly into your home directory.
+
+---
+
+## 🛠 Extras
+
+* `scripts/`: Handy utilities (e.g., ZFS checks, IPMI power control, Raycast integrations).
+* `Brewfile`: Run `brew bundle` to install macOS packages.
+
+---
+
