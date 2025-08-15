@@ -1,3 +1,23 @@
 [user]
-	name = philipbhaworth
-	email = philipbhaworth@gmail.com
+    name = philipbhaworth
+    email = philipbhaworth@gmail.com
+
+[init]
+    defaultBranch = main       # Start new repos on 'main'
+
+[fetch]
+    prune = true               # Auto-remove deleted remote branches
+
+[color]
+    ui = auto                  # Color output in terminal
+
+[core]
+    editor = vim               # Or 'nano', 'nvim', 'code --wait', etc.
+
+[alias]
+    st = status -sb            # Short status
+    co = checkout              # Switch branches (old style)
+    sw = switch                 # Switch branches (new style)
+    br = branch -vv             # Branch list with tracking info
+    lg = log --oneline --graph --all  # Pretty history view
+
