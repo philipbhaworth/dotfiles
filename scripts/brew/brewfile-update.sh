@@ -1,18 +1,19 @@
 #!/bin/bash
 
-BREWFILE="~/dotfiles/scripts/Brewfile"
+BREWFILE="~/dotfiles/Brewfile"
 
 echo "Generating new Brewfile..."
 brew bundle dump --file="$BREWFILE" --force
 
 echo "Checking for packages to cleanup..."
-if brew bundle cleanup --file="$BREWFILE" --dry-run | grep -q "Would uninstall"; then
+# Use brew bundle cleanup without --dry-run (it shows what would be removed by default)
+if brew bundle cleanup --file="$BREWFILE" 2>&1 | grep -q "Would uninstall"; then
   echo "The following packages would be removed:"
-  brew bundle cleanup --file="$BREWFILE" --dry-run
+  brew bundle cleanup --file="$BREWFILE"
   read -p "Proceed with cleanup? (y/N): " -n 1 -r
   echo
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    brew bundle cleanup --file="$BREWFILE"
+    brew bundle cleanup --file="$BREWFILE" --force
   else
     echo "Skipping cleanup"
   fi
