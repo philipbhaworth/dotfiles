@@ -44,10 +44,15 @@ else
 fi
 
 # Navigation
-alias ansi='cd ~/repos/ansible-homelab/ && ll'
-alias repo='cd ~/repos/ && ll'
-alias dot='cd ~/dotfiles && ll'
-alias compose='cd ~/repos/ansible-homelab/files/docker-compose && ll'
+alias ansi='cd ~/git/ansible-homelab/ && ll'
+alias gg='cd ~/git/ && ll'
+alias dot='cd ~/dotfiles/ && ll'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+
+
 
 # macOS-specific navigation
 if [[ "$OSTYPE" == "darwin"* ]]; then

@@ -1,0 +1,17 @@
+# Global search (Ctrl-R)
+search_mode = "fuzzy"
+filter_mode = "global"
+
+# Up-arrow: quick recall
+search_mode_shell_up_key_binding = "prefix"
+filter_mode_shell_up_key_binding = "global"  # "session" or "directory" / "workspace"
+
+# UI
+#inline_height = 12
+#update_check = false
+
+# Sync (optional)
+#auto_sync = true
+#sync_frequency = "10m"
+
+
