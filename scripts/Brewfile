@@ -12,6 +12,8 @@ brew "fastfetch"
 brew "fd"
 brew "ffmpeg"
 brew "fzf"
+brew "glow"
+brew "gum"
 brew "htop"
 brew "imagemagick"
 brew "jq"
@@ -25,12 +27,14 @@ brew "nmap"
 brew "poppler"
 brew "ripgrep"
 brew "sevenzip"
+brew "sshpass"
 brew "starship"
 brew "stow"
 brew "syncthing"
 brew "tmux"
 brew "tree"
 brew "whois"
+brew "yamllint"
 brew "yazi"
 brew "zoxide"
 brew "zsh-autosuggestions"
@@ -40,6 +44,7 @@ cask "1password"
 cask "aerospace"
 cask "alfred"
 cask "appcleaner"
+cask "coteditor"
 cask "discord"
 cask "firefox"
 cask "ghostty"
@@ -50,6 +55,7 @@ cask "istat-menus"
 cask "iterm2"
 cask "jordanbaird-ice"
 cask "karabiner-elements"
+cask "kitty"
 cask "maccy"
 cask "megasync"
 cask "microsoft-edge"
@@ -70,9 +76,7 @@ cask "windows-app"
 cask "zed"
 mas "1Password for Safari", id: 1569813296
 mas "Bear", id: 1091189122
-mas "DeskMinder", id: 6740942938
 mas "Drafts", id: 1435957248
-mas "Flow", id: 1423210932
 mas "GarageBand", id: 682658836
 mas "Hand Mirror", id: 1502839586
 mas "iMovie", id: 408981434
@@ -81,7 +85,6 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Obsidian Web Clipper", id: 6720708363
 mas "Pages", id: 409201541
-mas "PDFgear", id: 6469021132
 mas "Pure Paste", id: 1611378436
 mas "Things", id: 904280696
 vscode "aaron-bond.better-comments"
@@ -91,6 +94,7 @@ vscode "eamodio.gitlens"
 vscode "enkia.tokyo-night"
 vscode "esbenp.prettier-vscode"
 vscode "foxundermoon.shell-format"
+vscode "hashicorp.terraform"
 vscode "mikestead.dotenv"
 vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
