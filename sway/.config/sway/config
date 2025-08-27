@@ -53,6 +53,7 @@ include /etc/sway/config-vars.d/*
     # Exit sway
     bindsym $mod+Shift+e exec swaynag -t warning -m 'Do you really want to exit sway?' -B 'Yes' 'swaymsg exit'
 
+
     # Move focus (vim keys + arrows)
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down

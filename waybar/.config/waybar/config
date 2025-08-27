@@ -6,7 +6,6 @@
     "margin-right": 0,
     "margin-bottom": 0,
     "margin-left": 0,
-
     "modules-left": [
         "sway/workspaces"
     ],
@@ -15,49 +14,49 @@
     ],
     "modules-right": [
         "custom/notification",
-        "custom/clipboard",
+        "custom/clipboard", 
         "tray",
         "cpu",
         "memory",
         "network",
-        "pulseaudio"
+        "pulseaudio",
+        "custom/power"
     ],
-
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "tooltip": false
     },
-
     "custom/notification": {
         "exec-if": "which swaync-client",
         "exec": "swaync-client -swb",
         "on-click": "swaync-client -t -sw",
         "format": "{icon}",
         "format-icons": {
-            "notification": "",
-            "none": ""
+            "notification": "",
+            "none": ""
         },
         "tooltip": false
     },
-
     "custom/clipboard": {
-    "exec": "echo ''",
-    "format": "{}",
-    "on-click": "clipman pick --tool wofi",
-    "tooltip": false
+        "exec": "echo ''",
+        "format": "{}",
+        "on-click": "clipman pick --tool wofi",
+        "tooltip": false
     },
-
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "wlogout"
+    },
     "tray": {
         "spacing": 10,
         "tooltip": false
     },
-
     "clock": {
         "format": "{:%a %d, %I:%M %p}",
         "tooltip": false
     },
-
     "cpu": {
         "format": "cpu {usage}%",
         "interval": 2,
@@ -65,7 +64,6 @@
             "critical": 90
         }
     },
-
     "memory": {
         "format": "mem {percentage}%",
         "interval": 2,
@@ -73,14 +71,12 @@
             "critical": 80
         }
     },
-
     "network": {
         "format-wifi": "wifi up",
         "format-ethernet": "eth up",
         "format-disconnected": "no network",
         "tooltip": false
     },
-
     "pulseaudio": {
         "scroll-step": 5,
         "max-volume": 150,

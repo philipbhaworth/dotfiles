@@ -23,16 +23,11 @@ tooltip {
 #memory,
 #network,
 #pulseaudio,
-#custom-notification {
+#custom-notification,
+#custom-power {
     margin: 2px 4px 2px 0px;
     padding: 4px 6px;
     min-width: 60px;
-}
-
-#custom-clipboard {
-    margin: 2px 4px 2px 0px;
-    padding: 4px 6px;
-    min-width: 20px;
 }
 
 /* Workspaces */
@@ -105,10 +100,24 @@ tooltip {
     background-color: #ffb86c;
 }
 
-/* Clipboard Indicator (optional) */
+/* Clipboard Indicator */
 #custom-clipboard {
+    margin: 2px 4px 2px 0px;
+    padding: 4px 6px;
+    min-width: 20px;
     background-color: #50fa7b;
     color: #282a36;
+}
+
+/* Power Button */
+#custom-power {
+    background-color: #6272a4;
+    color: #f8f8f2;
+    min-width: 30px;
+}
+
+#custom-power:hover {
+    background-color: #44475a;
 }
 
 /* Critical states */
