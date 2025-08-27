@@ -15,10 +15,11 @@ set $filebrowser thunar
 set $menu wofi --show drun
 set $browser firefox
 
+
 include /etc/sway/config-vars.d/*
 
 ### Output configuration
-output * bg ~/wallpapers/26-Tahoe-Beach-Dawn.png fill
+#output * bg ~/wallpapers/26-Tahoe-Beach-Dawn.png fill
 
 ### Key bindings
 
@@ -31,8 +32,17 @@ output * bg ~/wallpapers/26-Tahoe-Beach-Dawn.png fill
     # Launch Firefox
     bindsym $mod+Shift+b exec $browser
 
+    # Discord on Mod+d
+    bindsym $mod+Shift+d exec flatpak run com.discordapp.Discord
+
+    # Obsidian on Mod+o
+    bindsym $mod+Shift+o exec flatpak run md.obsidian.Obsidian
+
+    # GNOME Text Editor on Mod+t
+    bindsym $mod+Shift+t exec flatpak run org.gnome.TextEditor
+
     # Kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # Application launcher
     bindsym $mod+d exec $menu
@@ -137,6 +147,12 @@ bar {
     bindsym Print exec grim
 
 ### Autostart
+# Start clipman properly and avoid duplicate instances
+exec_always wl-paste --watch clipman store --no-persist
+
+# Start Sway Notification Center (daemon)
+exec_always swaync
+
 
 
 ### Include system defaults
