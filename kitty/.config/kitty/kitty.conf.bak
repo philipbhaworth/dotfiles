@@ -64,3 +64,9 @@ map ctrl+shift+0 restore_font_size
 # SSH-helpful bindings
 map ctrl+shift+enter new_window
 map ctrl+shift+n new_os_window
+
+
+# BEGIN_KITTY_THEME
+# Tokyo Night Storm
+include current-theme.conf
+# END_KITTY_THEME

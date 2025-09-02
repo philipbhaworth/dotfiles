@@ -1,89 +1,152 @@
 {
     "layer": "top",
-    "spacing": 0,
-    "height": 0,
-    "margin-top": 0,
-    "margin-right": 0,
+    "height": 32,
+    "spacing": 10,
+    "margin-top": 5,
     "margin-bottom": 0,
-    "margin-left": 0,
+    "margin-left": 10,
+    "margin-right": 10,
+
     "modules-left": [
-        "sway/workspaces"
+        "group/workspaces-window"
     ],
     "modules-center": [
-        "clock"
+        "group/datetime" 
     ],
     "modules-right": [
-        "custom/notification",
-        "custom/clipboard", 
-        "tray",
-        "cpu",
-        "memory",
-        "network",
-        "pulseaudio",
-        "custom/power"
+        "group/system-stats",
+        "group/utilities"
     ],
+
+    // Custom bracket and separator elements
+    "custom/left-bracket": {
+        "format": "[",
+        "tooltip": false
+    },
+    "custom/right-bracket": {
+        "format": "]",
+        "tooltip": false
+    },
+    "custom/separator": {
+        "format": "|",
+        "tooltip": false
+    },
+
+    // Left bar: Workspaces + Active Window
+    "group/workspaces-window": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/left-bracket",
+            "sway/workspaces",
+            "custom/right-bracket",
+            "custom/left-bracket", 
+            "sway/window",
+            "custom/right-bracket"
+        ]
+    },
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
+        "format": "{name}",
         "tooltip": false
     },
-    "custom/notification": {
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "format": "{icon}",
-        "format-icons": {
-            "notification": "",
-            "none": ""
-        },
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 30,
         "tooltip": false
+    },
+
+    // Center bar: Date and Time
+    "group/datetime": {
+        "orientation": "horizontal", 
+        "modules": [
+            "custom/left-bracket",
+            "clock#date",
+            "custom/separator",
+            "clock#time", 
+            "custom/right-bracket"
+        ]
+    },
+    "clock#date": {
+        "format": "{:%a, %b %d}",
+        "tooltip": false
+    },
+    "clock#time": {
+        "format": "{:%I:%M %p}",
+        "tooltip": false
+    },
+
+    // Right bar: System Stats
+    "group/system-stats": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/left-bracket",
+            "cpu",
+            "custom/separator", 
+            "memory",
+            "custom/separator",
+            "custom/network",
+            "custom/right-bracket"
+        ]
+    },
+    "cpu": {
+        "format": " CPU:{usage}%",
+        "interval": 2,
+        "tooltip": false
+    },
+    "memory": {
+        "format": " RAM:{percentage}%", 
+        "interval": 2,
+        "tooltip": false
+    },
+    "custom/network": {
+        "format": " {}",
+        "exec": "echo 'ethernet'",
+        "on-click": "~/.config/waybar/scripts/network_toggle.sh",
+        "interval": "once",
+        "tooltip": true,
+        "tooltip-format": "Click to toggle IP display"
+    },
+
+    // Right bar: Utilities
+    "group/utilities": {
+        "orientation": "horizontal",
+        "modules": [
+            "custom/left-bracket",
+            "custom/clipboard",
+            "custom/separator",
+            "custom/bluetooth", 
+            "custom/separator",
+            "custom/notification",
+            "custom/separator",
+            "custom/power",
+            "custom/right-bracket"
+        ]
     },
     "custom/clipboard": {
-        "exec": "echo ''",
-        "format": "{}",
-        "on-click": "clipman pick --tool wofi",
-        "tooltip": false
+        "format": "clip",
+        "exec": "echo 'clip'",
+        "interval": "once",
+        "tooltip": false,
+        "on-click": "cliphist list | wofi --dmenu | cliphist decode | wl-copy"
+    },
+    "custom/bluetooth": {
+        "format": "bt",
+        "exec": "echo 'bt'", 
+        "interval": "once",
+        "tooltip": false,
+        "on-click": "blueman-manager"
+    },
+    "custom/notification": {
+        "format": "notify",
+        "exec": "echo 'notify'",
+        "interval": "once", 
+        "tooltip": false,
+        "on-click": "swaync-client -t -sw"
     },
     "custom/power": {
         "format": "⏻",
         "tooltip": false,
-        "on-click": "wlogout"
-    },
-    "tray": {
-        "spacing": 10,
-        "tooltip": false
-    },
-    "clock": {
-        "format": "{:%a %d, %I:%M %p}",
-        "tooltip": false
-    },
-    "cpu": {
-        "format": "cpu {usage}%",
-        "interval": 2,
-        "states": {
-            "critical": 90
-        }
-    },
-    "memory": {
-        "format": "mem {percentage}%",
-        "interval": 2,
-        "states": {
-            "critical": 80
-        }
-    },
-    "network": {
-        "format-wifi": "wifi up",
-        "format-ethernet": "eth up",
-        "format-disconnected": "no network",
-        "tooltip": false
-    },
-    "pulseaudio": {
-        "scroll-step": 5,
-        "max-volume": 150,
-        "format": "vol {volume}%",
-        "format-bluetooth": "vol {volume}%",
-        "nospacing": 1,
-        "on-click": "pavucontrol",
-        "tooltip": false
+        "on-click": "~/.config/waybar/scripts/power_menu.sh"
     }
 }
