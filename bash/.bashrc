@@ -73,3 +73,37 @@ alias aping='ansible all -i inventory.yml -m ping'
 if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
 fi
+# ~~~~~~~~~~~~~~~ SSH Agent Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+# Robust ssh-agent setup with persistent environment for multiple sessions
+start_ssh_agent() {
+    SSH_ENV="$HOME/.ssh/ssh-agent-environment"
+    
+    # Function to start new agent
+    start_new_agent() {
+        ssh-agent | head -2 > "${SSH_ENV}"
+        chmod 600 "${SSH_ENV}"
+        . "${SSH_ENV}" > /dev/null
+        ssh-add ~/.ssh/id_homelab_keys 2>/dev/null
+        echo "SSH agent started and key added"
+    }
+    
+    # Check if environment file exists and load it
+    if [ -f "${SSH_ENV}" ]; then
+        . "${SSH_ENV}" > /dev/null
+        
+        # Test if the agent is still running
+        if ! kill -0 $SSH_AGENT_PID 2>/dev/null; then
+            # Agent died, start new one
+            start_new_agent
+        elif ! ssh-add -l > /dev/null 2>&1; then
+            # Agent running but no keys loaded
+            ssh-add ~/.ssh/id_homelab_keys 2>/dev/null
+        fi
+    else
+        # No environment file exists, start new agent
+        start_new_agent
+    fi
+}
+
+# Start ssh-agent for interactive shells only
+start_ssh_agent
