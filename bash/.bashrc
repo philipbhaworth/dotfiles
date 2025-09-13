@@ -57,6 +57,7 @@ alias c='clear'
 alias grep='grep --color=auto'
 alias tree='tree -C'
 alias reload='source ~/.bashrc && echo "Reloaded!"'
+alias fd='fdfind'
 
 # Git
 alias gs='git status'
