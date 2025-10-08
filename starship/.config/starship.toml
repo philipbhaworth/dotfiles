@@ -1,6 +1,6 @@
 # ~/.config/starship.toml
-# Format with time properly included
-format = "$time$username@$hostname $directory$git_branch$git_status$line_break$character"
+# Format with bracketed elements
+format = "$time\\[$username@$hostname\\] $directory$git_branch$git_status$line_break$character"
 
 # Show username
 [username]
@@ -17,7 +17,7 @@ style = "yellow bold"
 
 # Directory
 [directory]
-truncation_length = 0
+truncation_length = 3
 style = "blue bold"
 format = "in [$path]($style)"
 truncation_symbol = "../"
@@ -29,7 +29,7 @@ error_symbol = "[❯](red)"
 vimcmd_symbol = "❮"
 
 [git_branch]
-format = " on [$symbol$branch]($style)"
+format = " \\[[$symbol$branch]($style)\\]"
 style = "purple bold"
 truncation_length = 20
 truncation_symbol = "…"
