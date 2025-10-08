@@ -123,13 +123,14 @@ alt-6 = 'workspace 6'
 #alt-7 = 'workspace 7'
 #alt-8 = 'workspace 8'
 #alt-9 = 'workspace 9'
+alt-a = 'workspace A' # for ai
 alt-b = 'workspace B' # for browser
 alt-c = 'workspace C' # for chat
 alt-e = 'workspace E' # for editor
 alt-f = 'workspace F' # for finder
 alt-m = 'workspace M' # for music
 alt-n = 'workspace N' # for notes
-#alt-r = 'workspace R' # remote
+alt-r = 'workspace R' # remote
 alt-t = 'workspace T' # terminal
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
@@ -142,13 +143,14 @@ alt-shift-6 = 'move-node-to-workspace 6'
 #alt-shift-7 = 'move-node-to-workspace 7'
 #alt-shift-8 = 'move-node-to-workspace 8'
 #alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-a = 'move-node-to-workspace A'
 alt-shift-b = 'move-node-to-workspace B'
 alt-shift-c = 'move-node-to-workspace C'
 alt-shift-e = 'move-node-to-workspace E'
 alt-shift-f = 'move-node-to-workspace F'
 alt-shift-m = 'move-node-to-workspace M'
 alt-shift-n = 'move-node-to-workspace N'
-#alt-shift-r = 'move-node-to-workspace R'
+alt-shift-r = 'move-node-to-workspace R'
 alt-shift-t = 'move-node-to-workspace T'
 
 # Force certain workspaces to appear on specific monitors
@@ -163,13 +165,14 @@ alt-shift-t = 'move-node-to-workspace T'
 #7 = 2
 #8 = 2
 #9 = 2
+A = 2
 B = 1
 C = 2
 E = 2
 F = 3
 M = 2
 N = 2
-#R = 1
+R = 1
 T = 2
 
 # 'service' binding mode declaration.

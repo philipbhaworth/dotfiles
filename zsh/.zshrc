@@ -9,7 +9,7 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 
 # macOS-specific Python path (only on Mac)
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    export PATH="/Users/$(whoami)/Library/Python/3.12/bin:$PATH"
+    export PATH="/Users/$(whoami)/Library/Python/3.13/bin:$PATH"
 fi
 
 # ~~~~~~~~~~~~~~~ Environment for Colors ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ fi
 
 # Navigation
 alias ansi='cd ~/git/ansible-homelab/ && ll'
-alias gg='cd ~/git/ && ll'
+alias dev='cd ~/dev/ && ll'
 alias dot='cd ~/dotfiles/ && ll'
 alias ..='cd ..'
 alias ...='cd ../..'
