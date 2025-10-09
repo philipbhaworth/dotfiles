@@ -7,8 +7,8 @@
 # ~~~~~~~~~~~~~~~ Core Settings ~~~~~~~~~~~~~~~~~~~~~~~~
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 # ~~~~~~~~~~~~~~~ Path Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -18,7 +18,7 @@ export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
 export CLICOLOR=1
 export LS_COLORS='di=34:ln=36:so=35:pi=33:ex=31:bd=34;46:cd=34;43:su=37;41:sg=30;43:tw=30;42:ow=30;43'
-export EDITOR=vim
+export EDITOR=nvim
 
 # ~~~~~~~~~~~~~~~ History Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 HISTCONTROL=ignoreboth
@@ -29,21 +29,21 @@ shopt -s histappend
 # ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 # Use Starship if available
 if command -v starship >/dev/null 2>&1; then
-    eval "$(starship init bash)"
+  eval "$(starship init bash)"
 else
-    # Simple fallback prompt
-    PS1='\[\e[32m\]\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\]\$ '
+  # Simple fallback prompt
+  PS1='\[\e[32m\]\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\]\$ '
 fi
 
 # ~~~~~~~~~~~~~~~ Core Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 # Modern ls with lsd fallback
 if command -v lsd >/dev/null 2>&1; then
-    alias ls='lsd --group-dirs first'
-    alias ll='lsd -alh --group-dirs first'
-    alias lt='lsd --tree -a -I ".git|__pycache__|.mypy_cache|.ipynb_checkpoints"'
+  alias ls='lsd --group-dirs first'
+  alias ll='lsd -alh --group-dirs first'
+  alias lt='lsd --tree -a -I ".git|__pycache__|.mypy_cache|.ipynb_checkpoints"'
 else
-    alias ls='ls --color=auto'
-    alias ll='ls -alh --color=auto'
+  alias ls='ls -lh --color=auto'
+  alias ll='ls -alh --color=auto'
 fi
 
 # Navigation
@@ -62,7 +62,7 @@ alias fd='fdfind'
 # Git
 alias gs='git status'
 if command -v lazygit >/dev/null 2>&1; then
-    alias lg='lazygit'
+  alias lg='lazygit'
 fi
 
 # Ansible shortcuts (if you use bash for ansible work)
@@ -72,11 +72,10 @@ alias aping='ansible all -i inventory.yml -m ping'
 # ~~~~~~~~~~~~~~~ Bash Completion ~~~~~~~~~~~~~~~~~~~~~~~~
 # Load completion if available (fast check)
 if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
+  . /usr/share/bash-completion/bash_completion
 fi
 # ~~~~~~~~~~~~~~~ SSH Agent Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 # Load extra bashrc fragments (managed by stow or local)
 for f in ~/.bashrc.d/*.sh; do
-    [ -r "$f" ] && . "$f"
+  [ -r "$f" ] && . "$f"
 done
-
