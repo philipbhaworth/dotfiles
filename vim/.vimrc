@@ -49,37 +49,62 @@ set mouse=a
 set wildmenu
 
 " Set clipboard to use system clipboard
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
 
 " ==================================================
-"                 Plugin Management
+" Statusline: minimal, readable, fast (no plugins, no git)
 " ==================================================
 
-" Begin vim-plug configuration
-"call plug#begin('~/.vim/plugged')
+" Always show a statusline (even with one window)
+set laststatus=2
 
-" List of plugins goes here
-"Plug 'vim-airline/vim-airline'        " Status line plugin
-"Plug 'vim-airline/vim-airline-themes' " Optional: Themes for vim-airline
-"Plug 'sheerun/vim-polyglot'           " Language pack for syntax highlighting
+" If your terminal supports truecolor, enable it (safe fallback to 256c)
+if has('termguicolors')
+  set termguicolors
+endif
 
-" You can add more plugins here using the Plug command
-" Example:
-" Plug 'tpope/vim-fugitive'
+" Colors for active/inactive statuslines (GUI + 256-color fallback)
+" Tweak to taste for your dark theme.
+highlight StatusLine   ctermfg=15  ctermbg=18  cterm=NONE  guifg=#FFFFFF guibg=#1f2a44 gui=NONE
+highlight StatusLineNC ctermfg=8   ctermbg=0   cterm=NONE  guifg=#808080 guibg=#000000 gui=NONE
 
-" Initialize plugin system
-"call plug#end()
-" End vim-plug configuration
+" Optional: if your font doesn't render '☰', set this to an empty string.
+let g:sl_icon = '☰'
 
-" ==================================================
-"               Plugin-Specific Settings
-" ==================================================
+" Mode label (fast: no external calls)
+function! ModeStatus()
+  let m = mode()
+  return m ==# 'n' ? 'NORMAL' :
+        \ m ==# 'i' ? 'INSERT' :
+        \ m ==# 'v' ? 'VISUAL' :
+        \ m ==# 'V' ? 'V-LINE' :
+        \ m ==# "\<C-v>" ? 'V-BLOCK' :
+        \ m ==# 'R' ? 'REPLACE' : m
+endfunction
 
-" Configure vim-airline
-"let g:airline_powerline_fonts = 1          " Enable Powerline fonts
-"let g:airline_theme = 'dark'               " Set the theme (optional)
-"let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#tabline#formatter = 'unique_tail'
+" Build the statusline
+" Left  : icon + mode + truncated path + flags
+" Right : filetype | format | encoding | line:col | percent
+set statusline=
+set statusline+=%#StatusLine#
+set statusline+=%{exists('g:sl_icon')?g:sl_icon:''}\ %{ModeStatus()}\ 
+set statusline+=%<%f\ %m%r%h%w
+set statusline+=%=
+set statusline+=%y\                                 " filetype
+set statusline+=\ [%{&fileformat}]                  " unix/dos/mac
+set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
+set statusline+=\ %l:%c\ %p%%
 
-" Optional: Additional vim-airline settings can be added here
+" == Optional tweaks ========================================
+" 1) Show only the filename (no directories):
+"    Replace %f above with %t (or uncomment the two lines below):
+" set statusline=
+" set statusline+=%#StatusLine#%{exists('g:sl_icon')?g:sl_icon.'' : ''}\ %{ModeStatus()}\ %<%t\ %m%r%h%w%=%y\ [%{&fileformat}]\ [%{&fileencoding?&fileencoding:&encoding}]\ %l:%c\ %p%%
+
+" 2) Add a small clock (cheap, safe):
+" set statusline+=\ %{strftime('%H:%M')}
+
+" == Title bar (top) = optional ============================
+set title
+set titlestring=%{hostname()}\ -\ %f\ (%{&filetype})
 

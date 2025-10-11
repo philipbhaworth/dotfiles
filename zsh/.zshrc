@@ -36,6 +36,7 @@ fi
 # Modern ls with lsd
 if command -v lsd >/dev/null 2>&1; then
     alias ls='lsd --group-dirs first'
+    alias lsl='lsd -lh --group-dirs first'
     alias ll='lsd -alh --group-dirs first'
     alias lt='lsd --tree -a -I ".git|__pycache__|.mypy_cache|.ipynb_checkpoints"'
 else
@@ -46,6 +47,7 @@ fi
 # Navigation
 alias ansi='cd ~/git/ansible-homelab/ && ll'
 alias dev='cd ~/dev/ && ll'
+alias devex='cd ~/dev-examples/ && ll'
 alias dot='cd ~/dotfiles/ && ll'
 alias ..='cd ..'
 alias ...='cd ../..'
