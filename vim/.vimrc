@@ -14,6 +14,7 @@ filetype plugin indent on
 " ==================================================
 
 " Enable 256 colors if available
+set background=dark
 if &t_Co >= 256 || has("gui_running")
   set t_Co=256
 endif
@@ -41,10 +42,14 @@ set softtabstop=4   " Number of spaces for Tab key in insert mode
 set expandtab       " Use spaces instead of tabs
 set autoindent      " Copy indent from current line when starting a new line
 set smartindent     " Smart indenting on new lines
+set smarttab        " Smart tab behavior at line start
 set shiftround      " Round indent to multiple of shiftwidth
 
 " Backspace behavior
 set backspace=indent,eol,start
+
+" Buffer management
+set hidden          " Allow switching buffers without saving
 
 " ==================================================
 " Search Settings
@@ -70,6 +75,7 @@ set mouse=a         " Enable mouse support
 " ==================================================
 
 set nobackup        " Disable backup files
+set nowritebackup   " Disable backup before overwriting
 set noswapfile      " Disable swap files
 
 " ==================================================
@@ -81,8 +87,17 @@ autocmd FileType json setlocal expandtab tabstop=2 shiftwidth=2 autoindent
 autocmd FileType toml setlocal expandtab tabstop=2 shiftwidth=2 autoindent
 autocmd FileType python setlocal expandtab tabstop=4 shiftwidth=4 autoindent
 autocmd FileType sh setlocal expandtab tabstop=4 shiftwidth=4 autoindent
+autocmd FileType puppet setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd FileType markdown setlocal wrap linebreak
 autocmd FileType make setlocal noexpandtab tabstop=8 shiftwidth=8
 
 " Optional: Enable spell check for markdown
 " autocmd FileType markdown setlocal spell spelllang=en_us
+
+" ==================================================
+" Security Settings
+" ==================================================
+
+" Prevent backup files for sensitive system files
+autocmd BufWrite /private/tmp/crontab.* set nowritebackup nobackup
+autocmd BufWrite /private/etc/pw.* set nowritebackup nobackup
