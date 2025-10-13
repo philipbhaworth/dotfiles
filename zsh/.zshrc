@@ -106,3 +106,5 @@ if [ -f "$HOME/.atuin/bin/env" ]; then
     fi
 fi
 
+# Source NixOS-specific config if it exists
+[ -f ~/.zshrc.nixos ] && source ~/.zshrc.nixos
