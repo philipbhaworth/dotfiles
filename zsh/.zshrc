@@ -82,21 +82,26 @@ fi
 # ~~~~~~~~~~~~~~~ Plugins (cross-platform) ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Autosuggestions
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    plugin_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-else
-    plugin_path="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
-fi
-[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-autosuggestions"
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#    plugin_path="$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+#else
+#    plugin_path="/usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+#fi
+#[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-autosuggestions"
+#
+## Syntax Highlighting
+#if [[ "$OSTYPE" == "darwin"* ]]; then
+#    plugin_path="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+#else
+#    plugin_path="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+#fi
+#[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-syntax-highlighting"
 
-# Syntax Highlighting
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    plugin_path="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-else
-    plugin_path="/usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-fi
-[ -f "$plugin_path" ] && source "$plugin_path" && echo "Loaded: zsh-syntax-highlighting"
-
+for plugin in zsh-autosuggestions zsh-syntax-highlighting; do
+    for dir in "$HOME/.oh-my-zsh/custom/plugins" "/usr/share" "$(brew --prefix 2>/dev/null)/share"; do
+        [[ -f "$dir/$plugin/$plugin.zsh" ]] && source "$dir/$plugin/$plugin.zsh" && break
+    done
+done
 
 # ~~~~~~~~~~~~~~~ Atuin ~~~~~~~~~~~~~~~~~~~~~~~~
 if [ -f "$HOME/.atuin/bin/env" ]; then
