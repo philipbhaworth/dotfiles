@@ -20,7 +20,7 @@ if &t_Co >= 256 || has("gui_running")
 endif
 
 " Use a built-in colorscheme (works everywhere)
-silent! colorscheme desert
+silent! colorscheme retrobox
 " Alternatives: slate, ron, pablo, koehler, elflord, darkblue
 
 " Fallback if colorscheme fails
@@ -36,9 +36,9 @@ endif
 set number
 
 " Indentation defaults (4-space)
-set tabstop=4       " Number of spaces tabs count for
-set shiftwidth=4    " Number of spaces to use for each step of (auto)indent
-set softtabstop=4   " Number of spaces for Tab key in insert mode
+set tabstop=2       " Number of spaces tabs count for
+set shiftwidth=2    " Number of spaces to use for each step of (auto)indent
+set softtabstop=2   " Number of spaces for Tab key in insert mode
 set expandtab       " Use spaces instead of tabs
 set autoindent      " Copy indent from current line when starting a new line
 set smartindent     " Smart indenting on new lines
