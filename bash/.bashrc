@@ -13,7 +13,7 @@ esac
 
 # ~~~~~~~~~~~~~~~ Path Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 # Add paths without recursive scanning
-export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/bin:$PATH"
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
 export CLICOLOR=1
@@ -27,11 +27,11 @@ HISTFILESIZE=10000
 shopt -s histappend
 
 # ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
-# Use Starship if available
-if command -v starship >/dev/null 2>&1; then
+if command -v prmt >/dev/null 2>&1; then
+  PS1='$(prmt --code $? "{path:#89dceb} {git:#f9e2af} {ok:#a6e3a1}{fail:#f38ba8} ")'
+elif command -v starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
 else
-  # Simple fallback prompt
   PS1='\[\e[32m\]\u@\h\[\e[0m\]:\[\e[34m\]\w\[\e[0m\]\$ '
 fi
 
