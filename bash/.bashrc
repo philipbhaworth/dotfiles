@@ -28,7 +28,7 @@ shopt -s histappend
 
 # ~~~~~~~~~~~~~~~ Prompt Configuration ~~~~~~~~~~~~~~~~~~~~~~~~
 if command -v prmt >/dev/null 2>&1; then
-  PS1='$(prmt --code $? "{path:#89dceb} {git:#f9e2af} {ok:#a6e3a1}{fail:#f38ba8} ")'
+  PS1='$(prmt --code $? "{time:dim:12h} {path:cyan} {git:purple::on :} {ok:green}{fail:red} ")'
 elif command -v starship >/dev/null 2>&1; then
   eval "$(starship init bash)"
 else
